@@ -1,6 +1,7 @@
 package data;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 public class Spent {
     private int index;
@@ -9,6 +10,19 @@ public class Spent {
     private String description;
     private float value;
     private Category category;
+
+    public Spent() {
+
+    }
+
+    public Spent(int index, String name, Calendar date, String description, float value, Category category) {
+        this.index = index;
+        this.name = name;
+        this.date = date;
+        this.description = description;
+        this.value = value;
+        this.category = category;
+    }
 
     public int getIndex() {
         return index;
@@ -60,5 +74,18 @@ public class Spent {
 
     public String toString() {
         return "ID: " + index + ", Nome: " + name + "Data: " + date.get(Calendar.DATE) + "/" + date.get(Calendar.MONTH) + "/" + date.get(Calendar.YEAR) + ", Description: " + description + ", Valor: " + value + "Categoria: " + category;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Spent spent = (Spent) o;
+        return index == spent.index && Float.compare(spent.value, value) == 0 && name.equals(spent.name) && date.get(Calendar.DATE) == spent.date.get(Calendar.DATE) && date.get(Calendar.MONTH) == spent.date.get(Calendar.MONTH) && date.get(Calendar.YEAR) == spent.date.get(Calendar.YEAR) && description.equals(spent.description) && category == spent.category;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(index, name, date, description, value, category);
     }
 }

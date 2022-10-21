@@ -5,7 +5,7 @@ import data.*;
 import java.util.*;
 
 public class Finances {
-    private Map<User, List<Spent>> users = new HashMap<>();
+    private final Map<User, List<Spent>> users = new HashMap<>();
     private User logged;
 
     public boolean newUser(User user) {

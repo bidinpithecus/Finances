@@ -31,8 +31,12 @@ public class Finances {
         return false;
     }
 
-    public void logoff() {
-        logged = new User();
+    public boolean logoff() {
+        if (isUserLogged()) {
+            logged = new User();
+            return true;
+        }
+        return false;
     }
 
     public boolean isUserLogged() {
@@ -49,6 +53,9 @@ public class Finances {
 
     public boolean deleteSpent(int index) {
         if (isUserLogged()) {
+            if (users.get(logged).size() <= index) {
+                return false;
+            }
             users.get(logged).remove(index);
             return true;
         }
@@ -65,13 +72,13 @@ public class Finances {
             for (Spent spent : users.get(logged)) {
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(spent.getDate().getTime());
-                if ((calendar.get(Calendar.MONTH) + 1) == month) {
+                if (calendar.get(Calendar.MONTH) == month) {
                     list.add(spent);
                 }
             }
             return list;
         }
-        return null;
+        return Collections.emptyList();
     }
 
     public List<Spent> listSpent(Category category) {
@@ -84,12 +91,15 @@ public class Finances {
             }
             return list;
         }
-        return null;
+        return Collections.emptyList();
     }
 
     // By string, change either the name or description
     public boolean editSpent(int index, int property, String content) {
         if (isUserLogged()) {
+            if (users.get(logged).size() <= index) {
+                return false;
+            }
             if (property == 1) {
                 users.get(logged).get(index).setName(content);
             } else if (property == 2) {
@@ -104,6 +114,9 @@ public class Finances {
 
     public boolean editSpent(int index, Calendar date) {
         if (isUserLogged()) {
+            if (users.get(logged).size() <= index) {
+                return false;
+            }
             users.get(logged).get(index).setDate(date);
             return true;
         }
@@ -112,6 +125,9 @@ public class Finances {
 
     public boolean editSpent(int index, float value) {
         if (isUserLogged()) {
+            if (users.get(logged).size() <= index) {
+                return false;
+            }
             users.get(logged).get(index).setValue(value);
             return true;
         }
@@ -120,6 +136,9 @@ public class Finances {
 
     public boolean editSpent(int index, Category category) {
         if (isUserLogged()) {
+            if (users.get(logged).size() <= index) {
+                return false;
+            }
             users.get(logged).get(index).setCategory(category);
             return true;
         }

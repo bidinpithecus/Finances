@@ -14,11 +14,11 @@ class UserTest {
 		calendar.set(2000, Calendar.OCTOBER,20);
 		user1.setBirthDate(calendar);
 		user1.setLogin("moysesMarinus");
-		user1.setPassword("qweasdzxc123456789");
+		user1.setPassword("qweasdzxc123456789".toCharArray());
 
 		Calendar birthDate = Calendar.getInstance();
 		birthDate.set(2000, Calendar.OCTOBER, 20);
 
-		assertEquals(user1, new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789", "7366504967", birthDate));
+		assertEquals(user1, new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDate));
 	}
 }

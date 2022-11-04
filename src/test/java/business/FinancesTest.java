@@ -17,7 +17,7 @@ class FinancesTest {
         Finances finances = new Finances();
         Calendar birthDate = Calendar.getInstance();
         birthDate.set(2000, Calendar.OCTOBER, 20);
-        User user = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789", "7366504967", birthDate);
+        User user = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDate);
 
         assertTrue(finances.newUser(user));
     }
@@ -27,9 +27,9 @@ class FinancesTest {
         Finances finances = new Finances();
         Calendar birthDate = Calendar.getInstance();
         birthDate.set(2000, Calendar.OCTOBER, 20);
-        User user = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789", "7366504967", birthDate);
+        User user = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDate);
         finances.newUser(user);
-        User user2 = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789", "7366504967", birthDate);
+        User user2 = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDate);
 
         assertFalse(finances.newUser(user2));
     }
@@ -39,10 +39,10 @@ class FinancesTest {
         Finances finances = new Finances();
         Calendar birthDate = Calendar.getInstance();
         birthDate.set(2000, Calendar.OCTOBER, 20);
-        User user = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789", "7366504967", birthDate);
+        User user = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDate);
         finances.newUser(user);
 
-        assertTrue(finances.login("moysesMarinus", "qweasdzxc123456789"));
+        assertTrue(finances.login("moysesMarinus", "qweasdzxc123456789".toCharArray()));
     }
 
     @Test
@@ -50,10 +50,10 @@ class FinancesTest {
         Finances finances = new Finances();
         Calendar birthDate = Calendar.getInstance();
         birthDate.set(2000, Calendar.OCTOBER, 20);
-        User user = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789", "7366504967", birthDate);
+        User user = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDate);
         finances.newUser(user);
 
-        assertFalse(finances.login("moyses", "qweasdzxc123456789"));
+        assertFalse(finances.login("moyses", "qweasdzxc123456789".toCharArray()));
     }
 
     @Test
@@ -61,10 +61,10 @@ class FinancesTest {
         Finances finances = new Finances();
         Calendar birthDate = Calendar.getInstance();
         birthDate.set(2000, Calendar.OCTOBER, 20);
-        User user = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789", "7366504967", birthDate);
+        User user = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDate);
         finances.newUser(user);
 
-        assertFalse(finances.login("moysesMarinus", "moysesMarinus"));
+        assertFalse(finances.login("moysesMarinus", "moysesMarinus".toCharArray()));
     }
 
     @Test
@@ -72,9 +72,9 @@ class FinancesTest {
         Finances finances = new Finances();
         Calendar birthDate = Calendar.getInstance();
         birthDate.set(2000, Calendar.OCTOBER, 20);
-        User user = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789", "7366504967", birthDate);
+        User user = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDate);
         finances.newUser(user);
-        finances.login("moysesMarinus", "qweasdzxc123456789");
+        finances.login("moysesMarinus", "qweasdzxc123456789".toCharArray());
 
         assertTrue(finances.isUserLogged());
     }
@@ -84,9 +84,9 @@ class FinancesTest {
         Finances finances = new Finances();
         Calendar birthDate = Calendar.getInstance();
         birthDate.set(2000, Calendar.OCTOBER, 20);
-        User user = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789", "7366504967", birthDate);
+        User user = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDate);
         finances.newUser(user);
-        finances.login("moysesMarinus", "asda");
+        finances.login("moysesMarinus", "asda".toCharArray());
 
         assertFalse(finances.isUserLogged());
     }
@@ -96,9 +96,9 @@ class FinancesTest {
         Finances finances = new Finances();
         Calendar birthDate = Calendar.getInstance();
         birthDate.set(2000, Calendar.OCTOBER, 20);
-        User user = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789", "7366504967", birthDate);
+        User user = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDate);
         finances.newUser(user);
-        finances.login("moysesMarinus", "qweasdzxc123456789");
+        finances.login("moysesMarinus", "qweasdzxc123456789".toCharArray());
 
         assertTrue(finances.logoff());
     }
@@ -116,9 +116,9 @@ class FinancesTest {
 
         Calendar birthDate = Calendar.getInstance();
         birthDate.set(2000, Calendar.OCTOBER, 20);
-        User user = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789", "7366504967", birthDate);
+        User user = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDate);
         finances.newUser(user);
-        finances.login("moysesMarinus", "qweasdzxc123456789");
+        finances.login("moysesMarinus", "qweasdzxc123456789".toCharArray());
 
         Calendar date = Calendar.getInstance();
         date.set(2022, Calendar.DECEMBER, 20);
@@ -143,9 +143,9 @@ class FinancesTest {
 
         Calendar birthDate = Calendar.getInstance();
         birthDate.set(2000, Calendar.OCTOBER, 20);
-        User user = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789", "7366504967", birthDate);
+        User user = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDate);
         finances.newUser(user);
-        finances.login("moysesMarinus", "qweasdzxc123456789");
+        finances.login("moysesMarinus", "qweasdzxc123456789".toCharArray());
 
         Calendar date = Calendar.getInstance();
         date.set(2022, Calendar.DECEMBER, 20);
@@ -162,9 +162,9 @@ class FinancesTest {
 
         Calendar birthDate = Calendar.getInstance();
         birthDate.set(2000, Calendar.OCTOBER, 20);
-        User user = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789", "7366504967", birthDate);
+        User user = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDate);
         finances.newUser(user);
-        finances.login("moysesMarinus", "qweasdzxc123456789");
+        finances.login("moysesMarinus", "qweasdzxc123456789".toCharArray());
 
         Calendar date = Calendar.getInstance();
         date.set(2022, Calendar.DECEMBER, 20);
@@ -194,9 +194,9 @@ class FinancesTest {
 
         Calendar birthDate = Calendar.getInstance();
         birthDate.set(2000, Calendar.OCTOBER, 20);
-        User user = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789", "7366504967", birthDate);
+        User user = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDate);
         finances.newUser(user);
-        finances.login("moysesMarinus", "qweasdzxc123456789");
+        finances.login("moysesMarinus", "qweasdzxc123456789".toCharArray());
 
         assertFalse(finances.deleteSpent(0));
     }
@@ -212,15 +212,15 @@ class FinancesTest {
         Calendar dateSpent = Calendar.getInstance();
         dateSpent.set(2022, Calendar.DECEMBER, 20);
 
-        User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789", "7366504967", birthDateMoyses);
-        User sheila = new User("Sheila Koant", "sheilaKoant", "12345", "9368299072", birthDateSheila);
+        User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDateMoyses);
+        User sheila = new User("Sheila Koant", "sheilaKoant", "12345".toCharArray(), "9368299072", birthDateSheila);
 
         Spent spent = new Spent(0, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
 
         finances.newUser(moyses);
         finances.newUser(sheila);
 
-        finances.login("moysesMarinus", "qweasdzxc123456789");
+        finances.login("moysesMarinus", "qweasdzxc123456789".toCharArray());
         finances.newSpent(spent);
 
         List<Spent> listOfSpents = new ArrayList<>();
@@ -240,19 +240,19 @@ class FinancesTest {
         Calendar dateSpent = Calendar.getInstance();
         dateSpent.set(2022, Calendar.DECEMBER, 20);
 
-        User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789", "7366504967", birthDateMoyses);
-        User sheila = new User("Sheila Koant", "sheilaKoant", "12345", "9368299072", birthDateSheila);
+        User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDateMoyses);
+        User sheila = new User("Sheila Koant", "sheilaKoant", "12345".toCharArray(), "9368299072", birthDateSheila);
 
         Spent spent = new Spent(0, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
 
         finances.newUser(moyses);
         finances.newUser(sheila);
 
-        finances.login("moysesMarinus", "qweasdzxc123456789");
+        finances.login("moysesMarinus", "qweasdzxc123456789".toCharArray());
         finances.newSpent(spent);
 
         finances.logoff();
-        finances.login("sheilaKoant", "12345");
+        finances.login("sheilaKoant", "12345".toCharArray());
 
         List<Spent> listOfSpents = new ArrayList<>();
 
@@ -268,13 +268,13 @@ class FinancesTest {
         Calendar dateSpent = Calendar.getInstance();
         dateSpent.set(2022, Calendar.DECEMBER, 20);
 
-        User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789", "7366504967", birthDateMoyses);
+        User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDateMoyses);
 
         Spent spent = new Spent(0, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
 
         finances.newUser(moyses);
 
-        finances.login("moysesMarinus", "qweasdzxc123456789");
+        finances.login("moysesMarinus", "qweasdzxc123456789".toCharArray());
         finances.newSpent(spent);
 
         List<Spent> listOfSpents = new ArrayList<>();
@@ -291,13 +291,13 @@ class FinancesTest {
         Calendar dateSpent = Calendar.getInstance();
         dateSpent.set(2022, Calendar.DECEMBER, 20);
 
-        User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789", "7366504967", birthDateMoyses);
+        User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDateMoyses);
 
         Spent spent = new Spent(0, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
 
         finances.newUser(moyses);
 
-        finances.login("moysesMarinus", "qweasdzxc123456789");
+        finances.login("moysesMarinus", "qweasdzxc123456789".toCharArray());
         finances.newSpent(spent);
 
         List<Spent> listOfSpents = new ArrayList<>();
@@ -315,13 +315,13 @@ class FinancesTest {
         Calendar dateSpent = Calendar.getInstance();
         dateSpent.set(2022, Calendar.DECEMBER, 20);
 
-        User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789", "7366504967", birthDateMoyses);
+        User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDateMoyses);
 
         Spent spent = new Spent(0, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
 
         finances.newUser(moyses);
 
-        finances.login("moysesMarinus", "qweasdzxc123456789");
+        finances.login("moysesMarinus", "qweasdzxc123456789".toCharArray());
         finances.newSpent(spent);
 
         List<Spent> listOfSpents = new ArrayList<>();
@@ -338,13 +338,13 @@ class FinancesTest {
         Calendar dateSpent = Calendar.getInstance();
         dateSpent.set(2022, Calendar.DECEMBER, 20);
 
-        User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789", "7366504967", birthDateMoyses);
+        User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDateMoyses);
 
         Spent spent = new Spent(0, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
 
         finances.newUser(moyses);
 
-        finances.login("moysesMarinus", "qweasdzxc123456789");
+        finances.login("moysesMarinus", "qweasdzxc123456789".toCharArray());
         finances.newSpent(spent);
 
         List<Spent> listOfSpents = new ArrayList<>();
@@ -362,13 +362,13 @@ class FinancesTest {
         Calendar dateSpent = Calendar.getInstance();
         dateSpent.set(2022, Calendar.DECEMBER, 20);
 
-        User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789", "7366504967", birthDateMoyses);
+        User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDateMoyses);
 
         Spent spent = new Spent(0, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
 
         finances.newUser(moyses);
 
-        finances.login("moysesMarinus", "qweasdzxc123456789");
+        finances.login("moysesMarinus", "qweasdzxc123456789".toCharArray());
         finances.newSpent(spent);
 
         assertTrue(finances.editSpent(0, 1, "Viagem Canada"));
@@ -383,13 +383,13 @@ class FinancesTest {
         Calendar dateSpent = Calendar.getInstance();
         dateSpent.set(2022, Calendar.DECEMBER, 20);
 
-        User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789", "7366504967", birthDateMoyses);
+        User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDateMoyses);
 
         Spent spent = new Spent(0, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
 
         finances.newUser(moyses);
 
-        finances.login("moysesMarinus", "qweasdzxc123456789");
+        finances.login("moysesMarinus", "qweasdzxc123456789".toCharArray());
         finances.newSpent(spent);
         finances.editSpent(0, 1, "Viagem Canadá");
 
@@ -407,13 +407,13 @@ class FinancesTest {
         Calendar dateSpent = Calendar.getInstance();
         dateSpent.set(2022, Calendar.DECEMBER, 20);
 
-        User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789", "7366504967", birthDateMoyses);
+        User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDateMoyses);
 
         Spent spent = new Spent(0, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
 
         finances.newUser(moyses);
 
-        finances.login("moysesMarinus", "qweasdzxc123456789");
+        finances.login("moysesMarinus", "qweasdzxc123456789".toCharArray());
         finances.newSpent(spent);
 
         assertTrue(finances.editSpent(0, 2, "Viagem à Europa com a família"));
@@ -428,13 +428,13 @@ class FinancesTest {
         Calendar dateSpent = Calendar.getInstance();
         dateSpent.set(2022, Calendar.DECEMBER, 20);
 
-        User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789", "7366504967", birthDateMoyses);
+        User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDateMoyses);
 
         Spent spent = new Spent(0, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
 
         finances.newUser(moyses);
 
-        finances.login("moysesMarinus", "qweasdzxc123456789");
+        finances.login("moysesMarinus", "qweasdzxc123456789".toCharArray());
         finances.newSpent(spent);
         finances.editSpent(0, 2, "Viagem à Europa com a família");
 
@@ -452,13 +452,13 @@ class FinancesTest {
         Calendar dateSpent = Calendar.getInstance();
         dateSpent.set(2022, Calendar.DECEMBER, 20);
 
-        User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789", "7366504967", birthDateMoyses);
+        User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDateMoyses);
 
         Spent spent = new Spent(0, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
 
         finances.newUser(moyses);
 
-        finances.login("moysesMarinus", "qweasdzxc123456789");
+        finances.login("moysesMarinus", "qweasdzxc123456789".toCharArray());
         finances.newSpent(spent);
 
         assertFalse(finances.editSpent(0, 3, "Viagem à Europa com a família"));
@@ -473,13 +473,13 @@ class FinancesTest {
         Calendar dateSpent = Calendar.getInstance();
         dateSpent.set(2022, Calendar.DECEMBER, 20);
 
-        User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789", "7366504967", birthDateMoyses);
+        User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDateMoyses);
 
         Spent spent = new Spent(0, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
 
         finances.newUser(moyses);
 
-        finances.login("moysesMarinus", "qweasdzxc123456789");
+        finances.login("moysesMarinus", "qweasdzxc123456789".toCharArray());
         finances.newSpent(spent);
 
         Calendar newDate = Calendar.getInstance();
@@ -497,13 +497,13 @@ class FinancesTest {
         Calendar dateSpent = Calendar.getInstance();
         dateSpent.set(2022, Calendar.DECEMBER, 20);
 
-        User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789", "7366504967", birthDateMoyses);
+        User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDateMoyses);
 
         Spent spent = new Spent(0, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
 
         finances.newUser(moyses);
 
-        finances.login("moysesMarinus", "qweasdzxc123456789");
+        finances.login("moysesMarinus", "qweasdzxc123456789".toCharArray());
         finances.newSpent(spent);
 
         Calendar newDate = Calendar.getInstance();
@@ -524,13 +524,13 @@ class FinancesTest {
         Calendar dateSpent = Calendar.getInstance();
         dateSpent.set(2022, Calendar.DECEMBER, 20);
 
-        User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789", "7366504967", birthDateMoyses);
+        User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDateMoyses);
 
         Spent spent = new Spent(0, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
 
         finances.newUser(moyses);
 
-        finances.login("moysesMarinus", "qweasdzxc123456789");
+        finances.login("moysesMarinus", "qweasdzxc123456789".toCharArray());
         finances.newSpent(spent);
 
         assertTrue(finances.editSpent(0, 35000F));
@@ -545,13 +545,13 @@ class FinancesTest {
         Calendar dateSpent = Calendar.getInstance();
         dateSpent.set(2022, Calendar.DECEMBER, 20);
 
-        User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789", "7366504967", birthDateMoyses);
+        User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDateMoyses);
 
         Spent spent = new Spent(0, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
 
         finances.newUser(moyses);
 
-        finances.login("moysesMarinus", "qweasdzxc123456789");
+        finances.login("moysesMarinus", "qweasdzxc123456789".toCharArray());
         finances.newSpent(spent);
 
         finances.editSpent(0, 35000F);
@@ -569,13 +569,13 @@ class FinancesTest {
         Calendar dateSpent = Calendar.getInstance();
         dateSpent.set(2022, Calendar.DECEMBER, 20);
 
-        User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789", "7366504967", birthDateMoyses);
+        User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDateMoyses);
 
         Spent spent = new Spent(0, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
 
         finances.newUser(moyses);
 
-        finances.login("moysesMarinus", "qweasdzxc123456789");
+        finances.login("moysesMarinus", "qweasdzxc123456789".toCharArray());
         finances.newSpent(spent);
 
         assertTrue(finances.editSpent(0, Category.OUTROS));
@@ -590,13 +590,13 @@ class FinancesTest {
         Calendar dateSpent = Calendar.getInstance();
         dateSpent.set(2022, Calendar.DECEMBER, 20);
 
-        User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789", "7366504967", birthDateMoyses);
+        User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDateMoyses);
 
         Spent spent = new Spent(0, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
 
         finances.newUser(moyses);
 
-        finances.login("moysesMarinus", "qweasdzxc123456789");
+        finances.login("moysesMarinus", "qweasdzxc123456789".toCharArray());
         finances.newSpent(spent);
 
         finances.editSpent(0, Category.OUTROS);

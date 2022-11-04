@@ -1,15 +1,14 @@
 package business;
 
 import data.*;
-
 import java.util.*;
 
 public class Finances {
     private final Map<User, List<Spent>> users = new HashMap<>();
-    private User logged;
+    private User logged = null;
 
     public boolean newUser(User user) {
-        if (users.get(user) == null) {
+        if (getUserByUsername(user.getLogin()) == null) {
             List<Spent> spents = new ArrayList<>();
             users.put(user, spents);
             return true;
@@ -21,9 +20,9 @@ public class Finances {
     // for this first part of the work, it will be going to be the simplest login system
     // with the database integration, a better a safer system is going to be implemented
     // in memory won't be as efficient
-    public boolean login(String login, String password) {
+    public boolean login(String login, char[] password) {
         for (User user : users.keySet()) {
-            if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
+            if (user.getLogin().equals(login) && Arrays.equals(user.getPassword(), password)) {
                 logged = user;
                 return true;
             }
@@ -37,6 +36,45 @@ public class Finances {
             return true;
         }
         return false;
+    }
+
+    public User getLogged() {
+        return logged;
+    }
+
+    public boolean confirmedUser(String name, String login, String phone, Calendar birthDate) {
+        User user = getUserByUsername(login);
+        if (user != null) {
+            boolean isBirthDateSame = user.getBirthDate().get(Calendar.DATE) == birthDate.get(Calendar.DATE) && user.getBirthDate().get(Calendar.MONTH) == birthDate.get(Calendar.MONTH) && user.getBirthDate().get(Calendar.YEAR) == birthDate.get(Calendar.YEAR);
+            boolean isNameSame = user.getName().equals(name);
+            boolean isLoginSame = user.getLogin().equals(login);
+            boolean isPhoneSame = user.getPhone().equals(phone);
+            if (isNameSame && isLoginSame && isPhoneSame && isBirthDateSame) {
+                logged = user;
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+
+    public User getUserByUsername(String username) {
+        for (Map.Entry<User, List<Spent>> user : users.entrySet()) {
+            if (user.getKey().getLogin().equals(username)) {
+                return user.getKey();
+            }
+        }
+        return null;
+    }
+
+    public boolean changePassword(String name, String login, String phone, Calendar birthDate, char[] newPassword) {
+        if (confirmedUser(name, login, phone, birthDate)) {
+            logged.setPassword(newPassword);
+            users.put(logged, users.remove(logged));
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public boolean isUserLogged() {
@@ -146,4 +184,10 @@ public class Finances {
         return false;
     }
 
+    @Override
+    public String toString() {
+        return "Finances{" +
+                "users=" + users +
+                '}';
+    }
 }

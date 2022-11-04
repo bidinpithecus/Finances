@@ -1,19 +1,16 @@
 package data;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class User {
     private String name;
     private String login;
-    private String password;
+    private char[] password;
     private String phone;
     private Calendar birthDate;
     private List<Spent> spents;
 
-    public User(String name, String login, String password, String phone, Calendar birthDate) {
+    public User(String name, String login, char[] password, String phone, Calendar birthDate) {
         this.name = name;
         this.login = login;
         this.password = password;
@@ -42,11 +39,11 @@ public class User {
         this.login = login;
     }
 
-    public String getPassword() {
+    public char[] getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(char[] password) {
         this.password = password;
     }
 
@@ -84,11 +81,11 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return name.equals(user.name) && login.equals(user.login) && password.equals(user.password) && phone.equals(user.phone) && birthDate.get(Calendar.DATE) == user.birthDate.get(Calendar.DATE) && birthDate.get(Calendar.MONTH) == user.birthDate.get(Calendar.MONTH) && birthDate.get(Calendar.YEAR) == user.birthDate.get(Calendar.YEAR);
+        return name.equals(user.name) && login.equals(user.login) && Arrays.equals(password, user.password) && phone.equals(user.phone) && birthDate.get(Calendar.DATE) == user.birthDate.get(Calendar.DATE) && birthDate.get(Calendar.MONTH) == user.birthDate.get(Calendar.MONTH) && birthDate.get(Calendar.YEAR) == user.birthDate.get(Calendar.YEAR);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, login, password, phone, birthDate, spents);
+        return Objects.hash(name, login, Arrays.hashCode(password), phone, birthDate, spents);
     }
 }

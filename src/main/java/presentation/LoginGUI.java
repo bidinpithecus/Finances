@@ -4,16 +4,21 @@ import business.Finances;
 import data.User;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.Calendar;
 import javax.swing.*;
 
-public class LoginGUI implements ActionListener {
+public class LoginGUI extends JFrame {
+	private static Finances finances;
 	private static JTextField usernameField;
 	private static JPasswordField passwordField;
+
+	public LoginGUI(Finances finances) {
+		LoginGUI.finances = finances;
+		initComponents();
+	}
+
 	public static void centerFrame(JFrame jFrame) {
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
 		int x = (int) ((dimension.getWidth() - jFrame.getWidth()) / 2);
@@ -21,23 +26,19 @@ public class LoginGUI implements ActionListener {
 		jFrame.setLocation(x, y);
 	}
 
-	public static void main(String[] args) {
-		Font title = new Font("Consolas", Font.BOLD, 18);
-		Font subTitle = new Font("Consolas", Font.PLAIN, 14);
-		Font subSubTitle = new Font("Consolas", Font.PLAIN, 12);
-
+	private void initComponents() {
 		JPanel jPanel = new JPanel();
 		jPanel.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
-		JFrame jFrame = new JFrame();
-		jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		jPanel.setBackground(Color.WHITE);
-		jFrame.setTitle("Login");
-		jFrame.add(jPanel);
-		jFrame.pack();
-		jFrame.setSize(800, 600);
-		jFrame.setLocationRelativeTo(null);
-		centerFrame(jFrame);
+		setResizable(false);
+		setTitle("Login");
+		add(jPanel);
+		pack();
+		setSize(800, 600);
+		setLocationRelativeTo(null);
+		centerFrame(this);
 
 		int padding = 5;
 		gbc.gridx = 0;
@@ -45,20 +46,20 @@ public class LoginGUI implements ActionListener {
 		gbc.insets = new Insets(padding, padding, padding, padding);
 		gbc.anchor = GridBagConstraints.WEST;
 		JLabel usernameLabel = new JLabel("Username");
-		usernameLabel.setFont(title);
+		usernameLabel.setFont(MyFonts.H1.getFont());
 		usernameLabel.setForeground(Color.decode(MyColors.TITLE.toString()));
 		jPanel.add(usernameLabel, gbc);
 
 		usernameField = new JTextField("Enter your username", 18);
 		usernameField.setPreferredSize(new Dimension(241, 26));
-		usernameField.setFont(subTitle);
+		usernameField.setFont(MyFonts.H2.getFont());
 		usernameField.setForeground(Color.decode(MyColors.SUBTITLE.toString()));
 		usernameField.addFocusListener(new FocusListener() {
 			@Override
 			public void focusGained(FocusEvent e) {
 				if (usernameField.getText().equals("Enter your username")) {
 					usernameField.setText("");
-					usernameField.setForeground(Color.BLACK);
+					usernameField.setForeground(Color.decode(MyColors.TITLE.toString()));
 				}
 			}
 
@@ -76,7 +77,7 @@ public class LoginGUI implements ActionListener {
 		jPanel.add(usernameField, gbc);
 
 		JLabel passwordLabel = new JLabel("Password");
-		passwordLabel.setFont(title);
+		passwordLabel.setFont(MyFonts.H1.getFont());
 		passwordLabel.setForeground(Color.decode(MyColors.TITLE.toString()));
 		gbc.gridx = 0;
 		gbc.gridy++;
@@ -84,7 +85,7 @@ public class LoginGUI implements ActionListener {
 
 		passwordField = new JPasswordField("Enter your password", 18);
 		passwordField.setPreferredSize(new Dimension(241, 26));
-		passwordField.setFont(subTitle);
+		passwordField.setFont(MyFonts.H2.getFont());
 		passwordField.setForeground(Color.decode(MyColors.SUBTITLE.toString()));
 		passwordField.setEchoChar((char) 0);
 		passwordField.addFocusListener(new FocusListener() {
@@ -92,7 +93,7 @@ public class LoginGUI implements ActionListener {
 			public void focusGained(FocusEvent e) {
 				if (passwordField.getPassword().length != 0) {
 					passwordField.setText("");
-					passwordField.setForeground(Color.BLACK);
+					passwordField.setForeground(Color.decode(MyColors.TITLE.toString()));
 					passwordField.setEchoChar('*');
 				}
 			}
@@ -111,56 +112,64 @@ public class LoginGUI implements ActionListener {
 		jPanel.add(passwordField, gbc);
 
 		JButton loginButton = new JButton("Login");
-		loginButton.setFont(title);
+		loginButton.setFont(MyFonts.H1.getFont());
 		loginButton.setPreferredSize(new Dimension(238, 26));
 		loginButton.setForeground(Color.WHITE);
 		loginButton.setBackground(Color.decode(MyColors.DARK_GREEN.toString()));
 		loginButton.setBorderPainted(false);
-		loginButton.addActionListener(new LoginGUI());
+		loginButton.addActionListener(e -> {
+
+			if (finances.login(usernameField.getText(), passwordField.getPassword())) {
+				HomeGUI homeGUI = new HomeGUI(finances);
+				homeGUI.setVisible(true);
+				dispose();
+			} else {
+				ErrorMessageGUI errorMessageGUI = new ErrorMessageGUI("Login Failed!");
+				errorMessageGUI.setVisible(true);
+			}
+		});
 
 		gbc.gridx = 0;
 		gbc.gridy++;
 		jPanel.add(loginButton, gbc);
 
-		JButton forgotPassword = new JButton("<html><p>Forgot your <span style=\"color: " + MyColors.BLUE + "\">password</span><span>?</span></p></html>");
-		forgotPassword.setFont(subSubTitle);
-		forgotPassword.setForeground(Color.decode(MyColors.TITLE.toString()));
-		forgotPassword.setBackground(Color.WHITE);
-		forgotPassword.setBorderPainted(false);
+		JButton forgotPasswordButton = new JButton("<html><p>Forgot your <span style=\"color: " + MyColors.BLUE + "\">password</span><span>?</span></p></html>");
+		forgotPasswordButton.setFont(MyFonts.H3.getFont());
+		forgotPasswordButton.setForeground(Color.decode(MyColors.TITLE.toString()));
+		forgotPasswordButton.setOpaque(false);
+		forgotPasswordButton.setContentAreaFilled(false);
+		forgotPasswordButton.setBorderPainted(false);
+		forgotPasswordButton.setFocusPainted(false);
+		forgotPasswordButton.addActionListener(e -> {
+			ConfirmUserGUI confirmUserGUI = new ConfirmUserGUI(finances);
+			confirmUserGUI.setVisible(true);
+			dispose();
+		});
 
 		gbc.gridx = 0;
 		gbc.gridy++;
 		gbc.anchor = GridBagConstraints.CENTER;
-		jPanel.add(forgotPassword, gbc);
+		jPanel.add(forgotPasswordButton, gbc);
 
 		gbc.gridx = 0;
 		gbc.gridy++;
-		JButton signIn = new JButton("<html><p>Don't have an account? <span style=\"color: " + MyColors.BLUE + "\">Sign in</span></p></html>");
-		signIn.setFont(subSubTitle);
-		signIn.setForeground(Color.decode(MyColors.TITLE.toString()));
-		signIn.setBackground(Color.WHITE);
-		signIn.setBorderPainted(false);
+		JButton signInButton = new JButton("<html><p>Don't have an account? <span style=\"color: " + MyColors.BLUE + "\">Sign in</span></p></html>");
+		signInButton.setFont(MyFonts.H3.getFont());
+		signInButton.setForeground(Color.decode(MyColors.TITLE.toString()));
+		signInButton.setBackground(Color.WHITE);
+		signInButton.setOpaque(false);
+		signInButton.setContentAreaFilled(false);
+		signInButton.setBorderPainted(false);
+		signInButton.setFocusPainted(false);
+		signInButton.addActionListener(e -> {
+			RegisterGUI registerGUI = new RegisterGUI(finances);
+			registerGUI.setVisible(true);
+			dispose();
+		});
+		jPanel.add(signInButton, gbc);
 
-		jPanel.add(signIn, gbc);
-
-		jFrame.setVisible(true);
+		getContentPane().requestFocusInWindow();
+		setVisible(true);
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		Finances finances = new Finances();
-
-		Calendar birthDate = Calendar.getInstance();
-		birthDate.set(2000, Calendar.OCTOBER, 20);
-
-		User user = new User("Moyses Marinus", "user", "qwe123", "7366504967", birthDate);
-
-		finances.newUser(user);
-
-		if (finances.login(usernameField.getText(), String.valueOf(passwordField.getPassword()))) {
-			JOptionPane.showMessageDialog(null, "Login Successful");
-		} else {
-			JOptionPane.showMessageDialog(null, "Login Failed");
-		}
-	}
 }

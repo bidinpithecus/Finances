@@ -8,8 +8,14 @@ public class HomeGUI extends JFrame {
 	private static Finances finances;
 
 	public HomeGUI(Finances finances) {
-		HomeGUI.finances = finances;
-		initComponents();
+		if (finances.isUserLogged()) {
+			HomeGUI.finances = finances;
+			initComponents();
+		} else {
+			LoginGUI loginGUI = new LoginGUI(finances);
+			loginGUI.setVisible(true);
+			dispose();
+		}
 	}
 
 	public static void centerFrame(JFrame jFrame) {
@@ -42,6 +48,22 @@ public class HomeGUI extends JFrame {
 		presentation.setFont(MyFonts.H1.getFont());
 		presentation.setForeground(Color.decode(MyColors.TITLE.toString()));
 		jPanel.add(presentation, gbc);
+
+		JButton newSpentButton = new JButton("New Spent");
+		newSpentButton.setFont(MyFonts.H1.getFont());
+		newSpentButton.setPreferredSize(new Dimension(238, 26));
+		newSpentButton.setForeground(Color.WHITE);
+		newSpentButton.setBackground(Color.decode(MyColors.DARK_GREEN.toString()));
+		newSpentButton.setBorderPainted(false);
+		newSpentButton.addActionListener(e -> {
+			NewSpentGUI newSpentGUI = new NewSpentGUI(finances);
+			newSpentGUI.setVisible(true);
+			dispose();
+		});
+		gbc.gridx++;
+		gbc.gridy++;
+		jPanel.add(newSpentButton, gbc);
+
 
 		getContentPane().requestFocusInWindow();
 		setVisible(true);

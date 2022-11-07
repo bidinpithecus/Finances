@@ -3,6 +3,7 @@ package presentation;
 import business.Finances;
 import data.User;
 
+import java.util.Arrays;
 import java.util.Calendar;
 
 public class Main {
@@ -13,6 +14,7 @@ public class Main {
 
 		User user = new User("Abluble", "user", "123".toCharArray(), "123123123", birthDate);
 		finances.newUser(user);
+		finances.login("user", new char[]{'1','2','3'});
 
 		new LoginGUI(finances);
 	}

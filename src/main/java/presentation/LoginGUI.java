@@ -1,12 +1,10 @@
 package presentation;
 
 import business.Finances;
-import data.User;
 
 import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import java.util.Calendar;
 import javax.swing.*;
 
 public class LoginGUI extends JFrame {
@@ -15,8 +13,14 @@ public class LoginGUI extends JFrame {
 	private static JPasswordField passwordField;
 
 	public LoginGUI(Finances finances) {
-		LoginGUI.finances = finances;
-		initComponents();
+		if (finances.isUserLogged()) {
+			HomeGUI homeGUI = new HomeGUI(finances);
+			homeGUI.setVisible(true);
+			dispose();
+		} else {
+			LoginGUI.finances = finances;
+			initComponents();
+		}
 	}
 
 	public static void centerFrame(JFrame jFrame) {

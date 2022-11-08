@@ -89,12 +89,39 @@ public class Finances {
         return false;
     }
 
-    public boolean deleteSpent(int index) {
+    public boolean spentExists(UUID id) {
+        if (!isUserLogged()) {
+            return false;
+        }
+        for (Spent spent : listSpent()) {
+            if (spent.getIndex().equals(id)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Spent getSpentById(UUID id) {
+        if (!isUserLogged()) {
+            return null;
+        }
+        if (!spentExists(id)) {
+            return null;
+        }
+        for (Spent spent : listSpent()) {
+            if (spent.getIndex().equals(id)) {
+                return spent;
+            }
+        }
+        return null;
+    }
+
+    public boolean deleteSpent(UUID id) {
         if (isUserLogged()) {
-            if (users.get(logged).size() <= index) {
+            if (!spentExists(id)) {
                 return false;
             }
-            users.get(logged).remove(index);
+            users.get(logged).remove(getSpentById(id));
             return true;
         }
         return false;
@@ -133,15 +160,15 @@ public class Finances {
     }
 
     // By string, change either the name or description
-    public boolean editSpent(int index, int property, String content) {
+    public boolean editSpent(UUID id, int property, String content) {
         if (isUserLogged()) {
-            if (users.get(logged).size() <= index) {
+            if (!spentExists(id)) {
                 return false;
             }
             if (property == 1) {
-                users.get(logged).get(index).setName(content);
+                users.get(logged).get(listSpent().indexOf(getSpentById(id))).setName(content);
             } else if (property == 2) {
-                users.get(logged).get(index).setDescription(content);
+                users.get(logged).get(listSpent().indexOf(getSpentById(id))).setDescription(content);
             } else {
                 return false;
             }
@@ -150,34 +177,34 @@ public class Finances {
         return true;
     }
 
-    public boolean editSpent(int index, Calendar date) {
+    public boolean editSpent(UUID id, Calendar date) {
         if (isUserLogged()) {
-            if (users.get(logged).size() <= index) {
+            if (!spentExists(id)) {
                 return false;
             }
-            users.get(logged).get(index).setDate(date);
+            users.get(logged).get(listSpent().indexOf(getSpentById(id))).setDate(date);
             return true;
         }
         return false;
     }
 
-    public boolean editSpent(int index, float value) {
+    public boolean editSpent(UUID id, float value) {
         if (isUserLogged()) {
-            if (users.get(logged).size() <= index) {
+            if (!spentExists(id)) {
                 return false;
             }
-            users.get(logged).get(index).setValue(value);
+            users.get(logged).get(listSpent().indexOf(getSpentById(id))).setValue(value);
             return true;
         }
         return false;
     }
 
-    public boolean editSpent(int index, Category category) {
+    public boolean editSpent(UUID id, Category category) {
         if (isUserLogged()) {
-            if (users.get(logged).size() <= index) {
+            if (!spentExists(id)) {
                 return false;
             }
-            users.get(logged).get(index).setCategory(category);
+            users.get(logged).get(listSpent().indexOf(getSpentById(id))).setCategory(category);
             return true;
         }
 

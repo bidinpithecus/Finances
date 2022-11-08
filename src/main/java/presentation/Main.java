@@ -1,10 +1,12 @@
 package presentation;
 
 import business.Finances;
+import data.Category;
+import data.Spent;
 import data.User;
 
-import java.util.Arrays;
 import java.util.Calendar;
+import java.util.UUID;
 
 public class Main {
 	public static void main(String[] args) {
@@ -12,10 +14,19 @@ public class Main {
 		Calendar birthDate = Calendar.getInstance();
 		birthDate.set(1111, Calendar.FEBRUARY, 1);
 
-		User user = new User("Abluble", "user", "123".toCharArray(), "123123123", birthDate);
+		User user = new User("Puta", "user", "123".toCharArray(), "123123123", birthDate);
 		finances.newUser(user);
 		finances.login("user", new char[]{'1','2','3'});
 
-		new LoginGUI(finances);
+		Calendar spentDate = Calendar.getInstance();
+		spentDate.set(2020, Calendar.FEBRUARY, 1);
+		Spent spent = new Spent(UUID.randomUUID(), "Ifood", spentDate, "Almoço", 20, Category.FOOD);
+		finances.newSpent(spent);
+
+		spentDate.set(2020, Calendar.FEBRUARY, 1);
+		spent = new Spent(UUID.randomUUID(), "Ifood", spentDate, "Janta", 30, Category.FOOD);
+		finances.newSpent(spent);
+
+		new HomeGUI(finances);
 	}
 }

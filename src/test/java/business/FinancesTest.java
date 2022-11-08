@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -119,10 +120,10 @@ class FinancesTest {
         User user = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDate);
         finances.newUser(user);
         finances.login("moysesMarinus", "qweasdzxc123456789".toCharArray());
-
+        UUID uuid = UUID.randomUUID();
         Calendar date = Calendar.getInstance();
         date.set(2022, Calendar.DECEMBER, 20);
-        Spent spent = new Spent(0, "Viagem Exterior", date, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
+        Spent spent = new Spent(uuid, "Viagem Exterior", date, "Viagem ao Canadá com a família", 40000.50F, Category.FUN);
 
         assertTrue(finances.newSpent(spent));
     }
@@ -133,7 +134,8 @@ class FinancesTest {
 
         Calendar date = Calendar.getInstance();
         date.set(2022, Calendar.DECEMBER, 20);
-        Spent spent = new Spent(0, "Viagem Exterior", date, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
+        UUID uuid = UUID.randomUUID();
+        Spent spent = new Spent(uuid, "Viagem Exterior", date, "Viagem ao Canadá com a família", 40000.50F, Category.FUN);
         assertFalse(finances.newSpent(spent));
     }
 
@@ -149,7 +151,8 @@ class FinancesTest {
 
         Calendar date = Calendar.getInstance();
         date.set(2022, Calendar.DECEMBER, 20);
-        Spent spent = new Spent(0, "Viagem Exterior", date, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
+        UUID uuid = UUID.randomUUID();
+        Spent spent = new Spent(uuid, "Viagem Exterior", date, "Viagem ao Canadá com a família", 40000.50F, Category.FUN);
 
         finances.newSpent(spent);
 
@@ -168,7 +171,8 @@ class FinancesTest {
 
         Calendar date = Calendar.getInstance();
         date.set(2022, Calendar.DECEMBER, 20);
-        Spent spent = new Spent(0, "Viagem Exterior", date, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
+        UUID uuid = UUID.randomUUID();
+        Spent spent = new Spent(uuid, "Viagem Exterior", date, "Viagem ao Canadá com a família", 40000.50F, Category.FUN);
 
         finances.newSpent(spent);
 
@@ -181,7 +185,8 @@ class FinancesTest {
 
         Calendar date = Calendar.getInstance();
         date.set(2022, Calendar.DECEMBER, 20);
-        Spent spent = new Spent(0, "Viagem Exterior", date, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
+        UUID uuid = UUID.randomUUID();
+        Spent spent = new Spent(uuid, "Viagem Exterior", date, "Viagem ao Canadá com a família", 40000.50F, Category.FUN);
 
         finances.newSpent(spent);
 
@@ -211,11 +216,11 @@ class FinancesTest {
         birthDateSheila.set(1998, Calendar.AUGUST, 15);
         Calendar dateSpent = Calendar.getInstance();
         dateSpent.set(2022, Calendar.DECEMBER, 20);
-
+        UUID uuid = UUID.randomUUID();
         User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDateMoyses);
         User sheila = new User("Sheila Koant", "sheilaKoant", "12345".toCharArray(), "9368299072", birthDateSheila);
 
-        Spent spent = new Spent(0, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
+        Spent spent = new Spent(uuid, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.FUN);
 
         finances.newUser(moyses);
         finances.newUser(sheila);
@@ -232,6 +237,7 @@ class FinancesTest {
     @Test
     void listEverySpentShouldReturnEmptyList() {
         Finances finances = new Finances();
+        UUID uuid = UUID.randomUUID();
 
         Calendar birthDateMoyses = Calendar.getInstance();
         birthDateMoyses.set(2000, Calendar.OCTOBER, 20);
@@ -243,7 +249,7 @@ class FinancesTest {
         User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDateMoyses);
         User sheila = new User("Sheila Koant", "sheilaKoant", "12345".toCharArray(), "9368299072", birthDateSheila);
 
-        Spent spent = new Spent(0, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
+        Spent spent = new Spent(uuid, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.FUN);
 
         finances.newUser(moyses);
         finances.newUser(sheila);
@@ -262,6 +268,7 @@ class FinancesTest {
     @Test
     void listSpentByMonthShouldReturnEmptyList() {
         Finances finances = new Finances();
+        UUID uuid = UUID.randomUUID();
 
         Calendar birthDateMoyses = Calendar.getInstance();
         birthDateMoyses.set(2000, Calendar.OCTOBER, 20);
@@ -270,7 +277,7 @@ class FinancesTest {
 
         User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDateMoyses);
 
-        Spent spent = new Spent(0, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
+        Spent spent = new Spent(uuid, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.FUN);
 
         finances.newUser(moyses);
 
@@ -285,6 +292,7 @@ class FinancesTest {
     @Test
     void listSpentByMonthShouldReturnList() {
         Finances finances = new Finances();
+        UUID uuid = UUID.randomUUID();
 
         Calendar birthDateMoyses = Calendar.getInstance();
         birthDateMoyses.set(2000, Calendar.OCTOBER, 20);
@@ -293,7 +301,7 @@ class FinancesTest {
 
         User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDateMoyses);
 
-        Spent spent = new Spent(0, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
+        Spent spent = new Spent(uuid, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.FUN);
 
         finances.newUser(moyses);
 
@@ -309,6 +317,7 @@ class FinancesTest {
     @Test
     void listSpentByCategoryShouldReturnEmptyList() {
         Finances finances = new Finances();
+        UUID uuid = UUID.randomUUID();
 
         Calendar birthDateMoyses = Calendar.getInstance();
         birthDateMoyses.set(2000, Calendar.OCTOBER, 20);
@@ -317,7 +326,7 @@ class FinancesTest {
 
         User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDateMoyses);
 
-        Spent spent = new Spent(0, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
+        Spent spent = new Spent(uuid, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.FUN);
 
         finances.newUser(moyses);
 
@@ -326,12 +335,13 @@ class FinancesTest {
 
         List<Spent> listOfSpents = new ArrayList<>();
 
-        assertEquals(listOfSpents, finances.listSpent(Category.COMIDA));
+        assertEquals(listOfSpents, finances.listSpent(Category.FOOD));
     }
 
     @Test
     void listSpentByCategoryShouldReturnList() {
         Finances finances = new Finances();
+        UUID uuid = UUID.randomUUID();
 
         Calendar birthDateMoyses = Calendar.getInstance();
         birthDateMoyses.set(2000, Calendar.OCTOBER, 20);
@@ -340,7 +350,7 @@ class FinancesTest {
 
         User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDateMoyses);
 
-        Spent spent = new Spent(0, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
+        Spent spent = new Spent(uuid, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.FUN);
 
         finances.newUser(moyses);
 
@@ -350,12 +360,13 @@ class FinancesTest {
         List<Spent> listOfSpents = new ArrayList<>();
         listOfSpents.add(spent);
 
-        assertEquals(listOfSpents, finances.listSpent(Category.LAZER));
+        assertEquals(listOfSpents, finances.listSpent(Category.FUN));
     }
 
     @Test
     void editSpentByPropertyNameShouldReturnTrue() {
         Finances finances = new Finances();
+        UUID uuid = UUID.randomUUID();
 
         Calendar birthDateMoyses = Calendar.getInstance();
         birthDateMoyses.set(2000, Calendar.OCTOBER, 20);
@@ -364,7 +375,7 @@ class FinancesTest {
 
         User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDateMoyses);
 
-        Spent spent = new Spent(0, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
+        Spent spent = new Spent(uuid, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.FUN);
 
         finances.newUser(moyses);
 
@@ -377,6 +388,7 @@ class FinancesTest {
     @Test
     void editedSpentByPropertyNameShouldBeEqual() {
         Finances finances = new Finances();
+        UUID uuid = UUID.randomUUID();
 
         Calendar birthDateMoyses = Calendar.getInstance();
         birthDateMoyses.set(2000, Calendar.OCTOBER, 20);
@@ -385,13 +397,13 @@ class FinancesTest {
 
         User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDateMoyses);
 
-        Spent spent = new Spent(0, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
+        Spent spent = new Spent(uuid, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.FUN);
 
         finances.newUser(moyses);
 
         finances.login("moysesMarinus", "qweasdzxc123456789".toCharArray());
         finances.newSpent(spent);
-        finances.editSpent(0, 1, "Viagem Canadá");
+        finances.editSpent(uuid, 1, "Viagem Canadá");
 
         spent.setName("Viagem Canadá");
 
@@ -401,6 +413,7 @@ class FinancesTest {
     @Test
     void editSpentByPropertyDescriptionShouldReturnTrue() {
         Finances finances = new Finances();
+        UUID uuid = UUID.randomUUID();
 
         Calendar birthDateMoyses = Calendar.getInstance();
         birthDateMoyses.set(2000, Calendar.OCTOBER, 20);
@@ -409,7 +422,7 @@ class FinancesTest {
 
         User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDateMoyses);
 
-        Spent spent = new Spent(0, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
+        Spent spent = new Spent(uuid, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.FUN);
 
         finances.newUser(moyses);
 
@@ -422,6 +435,7 @@ class FinancesTest {
     @Test
     void editedSpentByPropertyDescriptionShouldBeEqual() {
         Finances finances = new Finances();
+        UUID uuid = UUID.randomUUID();
 
         Calendar birthDateMoyses = Calendar.getInstance();
         birthDateMoyses.set(2000, Calendar.OCTOBER, 20);
@@ -430,7 +444,7 @@ class FinancesTest {
 
         User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDateMoyses);
 
-        Spent spent = new Spent(0, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
+        Spent spent = new Spent(uuid, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.FUN);
 
         finances.newUser(moyses);
 
@@ -446,6 +460,7 @@ class FinancesTest {
     @Test
     void editSpentByPropertyUnknownShouldReturnFalse() {
         Finances finances = new Finances();
+        UUID uuid = UUID.randomUUID();
 
         Calendar birthDateMoyses = Calendar.getInstance();
         birthDateMoyses.set(2000, Calendar.OCTOBER, 20);
@@ -454,7 +469,7 @@ class FinancesTest {
 
         User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDateMoyses);
 
-        Spent spent = new Spent(0, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
+        Spent spent = new Spent(uuid, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.FUN);
 
         finances.newUser(moyses);
 
@@ -467,6 +482,7 @@ class FinancesTest {
     @Test
     void editSpentByDateShouldReturnTrue() {
         Finances finances = new Finances();
+        UUID uuid = UUID.randomUUID();
 
         Calendar birthDateMoyses = Calendar.getInstance();
         birthDateMoyses.set(2000, Calendar.OCTOBER, 20);
@@ -475,7 +491,7 @@ class FinancesTest {
 
         User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDateMoyses);
 
-        Spent spent = new Spent(0, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
+        Spent spent = new Spent(uuid, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.FUN);
 
         finances.newUser(moyses);
 
@@ -491,6 +507,7 @@ class FinancesTest {
     @Test
     void editedSpentByDateShouldBeEqual() {
         Finances finances = new Finances();
+        UUID uuid = UUID.randomUUID();
 
         Calendar birthDateMoyses = Calendar.getInstance();
         birthDateMoyses.set(2000, Calendar.OCTOBER, 20);
@@ -499,7 +516,7 @@ class FinancesTest {
 
         User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDateMoyses);
 
-        Spent spent = new Spent(0, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
+        Spent spent = new Spent(uuid, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.FUN);
 
         finances.newUser(moyses);
 
@@ -518,6 +535,7 @@ class FinancesTest {
     @Test
     void editSpentByValueShouldReturnTrue() {
         Finances finances = new Finances();
+        UUID uuid = UUID.randomUUID();
 
         Calendar birthDateMoyses = Calendar.getInstance();
         birthDateMoyses.set(2000, Calendar.OCTOBER, 20);
@@ -526,7 +544,7 @@ class FinancesTest {
 
         User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDateMoyses);
 
-        Spent spent = new Spent(0, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
+        Spent spent = new Spent(uuid, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.FUN);
 
         finances.newUser(moyses);
 
@@ -539,6 +557,7 @@ class FinancesTest {
     @Test
     void editedSpentByValueShouldBeEqual() {
         Finances finances = new Finances();
+        UUID uuid = UUID.randomUUID();
 
         Calendar birthDateMoyses = Calendar.getInstance();
         birthDateMoyses.set(2000, Calendar.OCTOBER, 20);
@@ -547,7 +566,7 @@ class FinancesTest {
 
         User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDateMoyses);
 
-        Spent spent = new Spent(0, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
+        Spent spent = new Spent(uuid, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.FUN);
 
         finances.newUser(moyses);
 
@@ -563,6 +582,7 @@ class FinancesTest {
     @Test
     void editSpentByCategoryShouldReturnTrue() {
         Finances finances = new Finances();
+        UUID uuid = UUID.randomUUID();
 
         Calendar birthDateMoyses = Calendar.getInstance();
         birthDateMoyses.set(2000, Calendar.OCTOBER, 20);
@@ -571,19 +591,20 @@ class FinancesTest {
 
         User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDateMoyses);
 
-        Spent spent = new Spent(0, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
+        Spent spent = new Spent(uuid, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.FUN);
 
         finances.newUser(moyses);
 
         finances.login("moysesMarinus", "qweasdzxc123456789".toCharArray());
         finances.newSpent(spent);
 
-        assertTrue(finances.editSpent(0, Category.OUTROS));
+        assertTrue(finances.editSpent(0, Category.ANOTHER));
     }
 
     @Test
     void editedSpentByCategoryShouldBeEqual() {
         Finances finances = new Finances();
+        UUID uuid = UUID.randomUUID();
 
         Calendar birthDateMoyses = Calendar.getInstance();
         birthDateMoyses.set(2000, Calendar.OCTOBER, 20);
@@ -592,15 +613,15 @@ class FinancesTest {
 
         User moyses = new User("Moyses Marinus", "moysesMarinus", "qweasdzxc123456789".toCharArray(), "7366504967", birthDateMoyses);
 
-        Spent spent = new Spent(0, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.LAZER);
+        Spent spent = new Spent(uuid, "Viagem Exterior", dateSpent, "Viagem ao Canadá com a família", 40000.50F, Category.FUN);
 
         finances.newUser(moyses);
 
         finances.login("moysesMarinus", "qweasdzxc123456789".toCharArray());
         finances.newSpent(spent);
 
-        finances.editSpent(0, Category.OUTROS);
-        spent.setCategory(Category.OUTROS);
+        finances.editSpent(0, Category.ANOTHER);
+        spent.setCategory(Category.ANOTHER);
 
         assertEquals(spent, finances.listSpent().get(0));
     }

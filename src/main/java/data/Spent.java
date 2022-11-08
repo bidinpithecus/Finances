@@ -2,9 +2,10 @@ package data;
 
 import java.util.Calendar;
 import java.util.Objects;
+import java.util.UUID;
 
 public class Spent {
-    private int index;
+    private UUID index;
     private String name;
     private Calendar date;
     private String description;
@@ -12,10 +13,9 @@ public class Spent {
     private Category category;
 
     public Spent() {
-
     }
 
-    public Spent(int index, String name, Calendar date, String description, float value, Category category) {
+    public Spent(UUID index, String name, Calendar date, String description, float value, Category category) {
         this.index = index;
         this.name = name;
         this.date = date;
@@ -24,11 +24,11 @@ public class Spent {
         this.category = category;
     }
 
-    public int getIndex() {
+    public UUID getIndex() {
         return index;
     }
 
-    public void setIndex(int index) {
+    public void setIndex(UUID index) {
         this.index = index;
     }
 
@@ -72,8 +72,9 @@ public class Spent {
         this.category = category;
     }
 
+    @Override
     public String toString() {
-        return "ID: " + index + ", Nome: " + name + "Data: " + date.get(Calendar.DATE) + "/" + date.get(Calendar.MONTH) + "/" + date.get(Calendar.YEAR) + ", Description: " + description + ", Valor: " + value + "Categoria: " + category;
+        return "ID: " + index + ", Nome: " + name + ", Data: " + date.get(Calendar.DATE) + "/" + date.get(Calendar.MONTH) + "/" + date.get(Calendar.YEAR) + ", Description: " + description + ", Valor: " + value + ", Categoria: " + category;
     }
 
     @Override

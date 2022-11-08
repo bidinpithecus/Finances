@@ -16,6 +16,8 @@ import java.awt.event.KeyEvent;
 import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.UUID;
+import java.util.logging.Logger;
 
 public class NewSpentGUI extends JFrame {
 	private static Finances finances;
@@ -23,7 +25,7 @@ public class NewSpentGUI extends JFrame {
 	private JTextField descriptionField;
 	private JFormattedTextField dateField;
 	private JTextField valueField;
-	private JComboBox<String> categoryField;
+	private JComboBox<Category> categoryField;
 
 	public NewSpentGUI(Finances finances) {
 		NewSpentGUI.finances = finances;
@@ -61,8 +63,6 @@ public class NewSpentGUI extends JFrame {
 		registerLabel.setFont(MyFonts.H1.getFont());
 		registerLabel.setForeground(Color.decode(MyColors.TITLE.toString()));
 		jPanel.add(registerLabel, gbc);
-
-//    public Spent(int index, String name, Calendar date, String description, float value, Category category) {
 
 		nameField = new JTextField("Name", 18);
 		nameField.setPreferredSize(new Dimension(241, 26));
@@ -202,18 +202,12 @@ public class NewSpentGUI extends JFrame {
 		gbc.gridy++;
 		jPanel.add(valueField, gbc);
 
-		categoryField = new JComboBox<>();
+		categoryField = new JComboBox<>(Category.values());
 		categoryField.setPreferredSize(new Dimension(238, 26));
 		categoryField.setFont(MyFonts.H2.getFont());
 		categoryField.setForeground(Color.decode(MyColors.TITLE.toString()));
-		categoryField.addItem("Food");
-		categoryField.addItem("Fun");
-		categoryField.addItem("Education");
-		categoryField.addItem("Health");
-		categoryField.addItem("Transportation");
-		categoryField.addItem("Another");
+
 		categoryField.setSelectedIndex(0);
-		categoryField.addActionListener(e -> System.out.println(categoryField.getSelectedItem()));
 		gbc.gridx = 0;
 		gbc.gridy++;
 		jPanel.add(categoryField, gbc);
@@ -224,7 +218,46 @@ public class NewSpentGUI extends JFrame {
 		registerButton.setForeground(Color.WHITE);
 		registerButton.setBackground(Color.decode(MyColors.DARK_GREEN.toString()));
 		registerButton.setBorderPainted(false);
-		registerButton.addActionListener(e -> System.out.println("Spent add button pushed"));
+		registerButton.addActionListener(e -> {
+			Spent newSpent;
+			DateValidator dateValidator = new DateValidator("dd/mm/yyyy");
+			if (!dateValidator.isValid(dateField.getText())) {
+				ErrorMessageGUI errorMessageGUI = new ErrorMessageGUI("Warning, Invalid date!");
+				errorMessageGUI.setVisible(true);
+				return;
+			} else {
+				newSpent = new Spent();
+				Calendar date = Calendar.getInstance();
+				String[] dateStr = dateField.getText().split("/");
+				date.set(Integer.parseInt(dateStr[2]), Integer.parseInt(dateStr[1]), Integer.parseInt(dateStr[0]));
+				newSpent.setDate(date);
+			}
+			newSpent.setIndex(UUID.randomUUID());
+			newSpent.setName(nameField.getText());
+			newSpent.setDescription(descriptionField.getText());
+
+			try {
+				Float.parseFloat(valueField.getText());
+			} catch (NumberFormatException ex) {
+				ErrorMessageGUI errorMessageGUI = new ErrorMessageGUI("Warning, Invalid value!");
+				errorMessageGUI.setVisible(true);
+				return;
+			}
+
+			float value = Float.parseFloat(valueField.getText());
+			newSpent.setValue(value);
+			Object selectedItem = categoryField.getSelectedItem();
+			newSpent.setCategory((Category) selectedItem);
+
+			if (finances.newSpent(newSpent)) {
+				HomeGUI homeGUI = new HomeGUI(finances);
+				homeGUI.setVisible(true);
+				dispose();
+			} else {
+				ErrorMessageGUI errorMessageGUI = new ErrorMessageGUI("Warning, Unable to add it!");
+				errorMessageGUI.setVisible(true);
+			}
+		});
 
 		gbc.gridx = 0;
 		gbc.gridy++;

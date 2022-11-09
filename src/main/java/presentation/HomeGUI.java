@@ -72,40 +72,80 @@ public class HomeGUI extends JFrame {
 			dispose();
 		});
 		gbc.anchor = GridBagConstraints.EAST;
-		gbc.gridx++;
 		jPanel.add(newSpentButton, gbc);
 
-		gbc.anchor = GridBagConstraints.CENTER;
 		gbc.gridx = 0;
 		gbc.gridy++;
+		JLabel hrLabel = new JLabel("<html>\n" +
+				"<head>\n" +
+				"<style type=\"text/css\">\n" +
+				"body { margin: 0; width: 300px; }\n" +
+				"</style>\n" +
+				"</head>\n" +
+				"<body>\n" +
+				"<div>\n" +
+				"<hr>\n" +
+				"</div>\n" +
+				"</body>\n" +
+				"</html>");
+		hrLabel.setFont(MyFonts.H1.getFont());
+		hrLabel.setForeground(Color.decode(MyColors.TITLE.toString()));
+		jPanel.add(hrLabel, gbc);
 
+		gbc.anchor = GridBagConstraints.CENTER;
 		if (finances.listSpent().isEmpty()) {
 			JLabel noActivitiesLabel = new JLabel("No activities registered");
 			noActivitiesLabel.setFont(MyFonts.H1.getFont());
 			noActivitiesLabel.setForeground(Color.decode(MyColors.TITLE.toString()));
 			jPanel.add(noActivitiesLabel, gbc);
 		} else {
-			JLabel noActivitiesLabel = new JLabel("<html><p><hr></p></html>");
-			noActivitiesLabel.setFont(MyFonts.H1.getFont());
-			noActivitiesLabel.setForeground(Color.decode(MyColors.TITLE.toString()));
-			jPanel.add(noActivitiesLabel, gbc);
+			gbc.anchor = GridBagConstraints.WEST;
 			for (Spent spent : finances.listSpent()) {
+				JPanel spentPanel = new JPanel();
+				spentPanel.setLayout(new GridBagLayout());
+				GridBagConstraints gbcSpent = new GridBagConstraints();
+				setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+				spentPanel.setBackground(Color.WHITE);
+
+				JLabel titleLabel = new JLabel("Ifood");
+				titleLabel.setFont(MyFonts.H2.getFont());
+				titleLabel.setForeground(Color.decode(MyColors.TITLE.toString()));
+				titleLabel.setBackground(Color.WHITE);
+				titleLabel.setOpaque(false);
+				gbcSpent.gridx = 0;
+				gbcSpent.gridy++;
+				spentPanel.add(titleLabel, gbcSpent);
+
+				JLabel priceLabel = new JLabel("$12");
+				priceLabel.setFont(MyFonts.H2.getFont());
+				priceLabel.setForeground(Color.decode(MyColors.TITLE.toString()));
+				priceLabel.setBackground(Color.WHITE);
+				priceLabel.setOpaque(false);
+				gbcSpent.gridx++;
+				spentPanel.add(priceLabel, gbcSpent);
+
 				gbc.gridx = 0;
 				gbc.gridy++;
-				JButton loginButton = new JButton("<html><p>" + spent.getName() + " - $"+ spent.getValue() + " - " + spent.getDate().get(Calendar.DATE) + "/" + (spent.getDate().get(Calendar.MONTH) + 1) + "/" + spent.getDate().get(Calendar.YEAR) + "<hr></p></html>");
-				loginButton.setFont(MyFonts.H3.getFont());
-				loginButton.setForeground(Color.decode(MyColors.TITLE.toString()));
-				loginButton.setBackground(Color.WHITE);
-				loginButton.setOpaque(false);
-				loginButton.setContentAreaFilled(false);
-				loginButton.setBorderPainted(false);
-				loginButton.setFocusPainted(false);
-				loginButton.addActionListener(e -> {
-					JFrame loginGUI = new LoginGUI(finances);
-					loginGUI.setVisible(true);
-					dispose();
-				});
-				jPanel.add(loginButton, gbc);
+				jPanel.add(spentPanel, gbc);
+
+				gbc.gridx = 0;
+				gbc.gridy++;
+				JLabel hrLoopLabel = new JLabel("<html>\n" +
+						"<head>\n" +
+						"<style type=\"text/css\">\n" +
+						"body { margin: 0; width: 300px; }\n" +
+						"</style>\n" +
+						"</head>\n" +
+						"<body>\n" +
+						"<div>\n" +
+						"<hr>\n" +
+						"</div>\n" +
+						"</body>\n" +
+						"</html>");
+				hrLoopLabel.setFont(MyFonts.H1.getFont());
+				hrLoopLabel.setForeground(Color.decode(MyColors.TITLE.toString()));
+				jPanel.add(hrLoopLabel, gbc);
+
 			}
 		}
 

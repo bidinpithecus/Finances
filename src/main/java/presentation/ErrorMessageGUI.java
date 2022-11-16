@@ -38,14 +38,14 @@ public class ErrorMessageGUI extends JFrame {
 		gbc.insets = new Insets(padding, padding, padding, padding);
 		gbc.anchor = GridBagConstraints.CENTER;
 
-		errorLabel.setFont(MyFonts.H1.getFont());
+		errorLabel.setFont(MyFonts.H1Bold.getFont());
 		errorLabel.setForeground(Color.decode(MyColors.TITLE.toString()));
 		gbc.gridx = 0;
 		gbc.gridy++;
 		jPanel.add(errorLabel, gbc);
 
 		JButton checkUser = new JButton("OK");
-		checkUser.setFont(MyFonts.H1.getFont());
+		checkUser.setFont(MyFonts.H1Bold.getFont());
 		checkUser.setForeground(Color.decode(MyColors.TITLE.toString()));
 		checkUser.setBackground(Color.decode(MyColors.SUBTITLE.toString()));
 		checkUser.setBorderPainted(false);

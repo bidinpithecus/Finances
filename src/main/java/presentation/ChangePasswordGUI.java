@@ -45,13 +45,13 @@ public class ChangePasswordGUI extends JFrame {
 		gbc.anchor = GridBagConstraints.CENTER;
 
 		JLabel registerLabel = new JLabel("Change Password");
-		registerLabel.setFont(MyFonts.H1.getFont());
+		registerLabel.setFont(MyFonts.H1Bold.getFont());
 		registerLabel.setForeground(Color.decode(MyColors.TITLE.toString()));
 		jPanel.add(registerLabel, gbc);
 
 		passwordField = new JPasswordField("Password", 18);
 		passwordField.setPreferredSize(new Dimension(241, 26));
-		passwordField.setFont(MyFonts.H2.getFont());
+		passwordField.setFont(MyFonts.H2Plain.getFont());
 		passwordField.setForeground(Color.decode(MyColors.SUBTITLE.toString()));
 		passwordField.setEchoChar((char) 0);
 		passwordField.addFocusListener(new FocusListener() {
@@ -79,7 +79,7 @@ public class ChangePasswordGUI extends JFrame {
 
 		passwordConfirmationField = new JPasswordField("Confirm password", 18);
 		passwordConfirmationField.setPreferredSize(new Dimension(241, 26));
-		passwordConfirmationField.setFont(MyFonts.H2.getFont());
+		passwordConfirmationField.setFont(MyFonts.H2Plain.getFont());
 		passwordConfirmationField.setForeground(Color.decode(MyColors.SUBTITLE.toString()));
 		passwordConfirmationField.setEchoChar((char) 0);
 		passwordConfirmationField.addFocusListener(new FocusListener() {
@@ -106,7 +106,7 @@ public class ChangePasswordGUI extends JFrame {
 		jPanel.add(passwordConfirmationField, gbc);
 
 		JButton changeButton = new JButton("Change");
-		changeButton.setFont(MyFonts.H1.getFont());
+		changeButton.setFont(MyFonts.H1Bold.getFont());
 		changeButton.setPreferredSize(new Dimension(238, 26));
 		changeButton.setForeground(Color.WHITE);
 		changeButton.setBackground(Color.decode(MyColors.DARK_GREEN.toString()));

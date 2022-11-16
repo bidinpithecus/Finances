@@ -13,19 +13,24 @@ import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Objects;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicBoolean;
 
-public class NewSpentGUI extends JFrame {
+public class EditSpentGUI extends JFrame {
 	private static Finances finances;
+	private Spent spentToBeEdited;
 	private JTextField nameField;
 	private JTextField descriptionField;
 	private JFormattedTextField dateField;
 	private JTextField valueField;
 	private JComboBox<Category> categoryField;
 
-	public NewSpentGUI(Finances finances) {
-		NewSpentGUI.finances = finances;
+	public EditSpentGUI(Finances finances, UUID id) {
+		EditSpentGUI.finances = finances;
+		spentToBeEdited = finances.getSpentById(id);
 		initComponents();
 	}
 
@@ -43,7 +48,7 @@ public class NewSpentGUI extends JFrame {
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		jPanel.setBackground(Color.WHITE);
 		setResizable(false);
-		setTitle("New spent");
+		setTitle("Edit spent");
 		add(jPanel);
 		pack();
 		setSize(800, 600);
@@ -56,19 +61,19 @@ public class NewSpentGUI extends JFrame {
 		gbc.insets = new Insets(padding, padding, padding, padding);
 		gbc.anchor = GridBagConstraints.CENTER;
 
-		JLabel registerLabel = new JLabel("Add new spent");
+		JLabel registerLabel = new JLabel("Edit spent");
 		registerLabel.setFont(MyFonts.H1Bold.getFont());
 		registerLabel.setForeground(Color.decode(MyColors.TITLE.toString()));
 		jPanel.add(registerLabel, gbc);
 
-		nameField = new JTextField("Name", 18);
+		nameField = new JTextField(spentToBeEdited.getName(), 18);
 		nameField.setPreferredSize(new Dimension(241, 26));
 		nameField.setFont(MyFonts.H2Plain.getFont());
-		nameField.setForeground(Color.decode(MyColors.SUBTITLE.toString()));
+		nameField.setForeground(Color.decode(MyColors.SUBTITLE2.toString()));
 		nameField.addFocusListener(new FocusListener() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				if (nameField.getText().equals("Name")) {
+				if (nameField.getText().equals(spentToBeEdited.getName())) {
 					nameField.setText("");
 					nameField.setForeground(Color.decode(MyColors.TITLE.toString()));
 				}
@@ -77,8 +82,8 @@ public class NewSpentGUI extends JFrame {
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (nameField.getText().isEmpty()) {
-					nameField.setText("Name");
-					nameField.setForeground(Color.decode(MyColors.SUBTITLE.toString()));
+					nameField.setText(spentToBeEdited.getName());
+					nameField.setForeground(Color.decode(MyColors.SUBTITLE2.toString()));
 				}
 			}
 		});
@@ -87,14 +92,14 @@ public class NewSpentGUI extends JFrame {
 		gbc.gridy++;
 		jPanel.add(nameField, gbc);
 
-		descriptionField = new JTextField("Description", 18);
+		descriptionField = new JTextField(spentToBeEdited.getDescription(), 18);
 		descriptionField.setPreferredSize(new Dimension(241, 26));
 		descriptionField.setFont(MyFonts.H2Plain.getFont());
-		descriptionField.setForeground(Color.decode(MyColors.SUBTITLE.toString()));
+		descriptionField.setForeground(Color.decode(MyColors.SUBTITLE2.toString()));
 		descriptionField.addFocusListener(new FocusListener() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				if (descriptionField.getText().equals("Description")) {
+				if (descriptionField.getText().equals(spentToBeEdited.getDescription())) {
 					descriptionField.setText("");
 					descriptionField.setForeground(Color.decode(MyColors.TITLE.toString()));
 				}
@@ -103,8 +108,8 @@ public class NewSpentGUI extends JFrame {
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (descriptionField.getText().isEmpty()) {
-					descriptionField.setText("Description");
-					descriptionField.setForeground(Color.decode(MyColors.SUBTITLE.toString()));
+					descriptionField.setText(spentToBeEdited.getDescription());
+					descriptionField.setForeground(Color.decode(MyColors.SUBTITLE2.toString()));
 				}
 			}
 		});
@@ -121,11 +126,14 @@ public class NewSpentGUI extends JFrame {
 			e.printStackTrace();
 		}
 
+		String spentString = String.format("%02d", spentToBeEdited.getDate().get(Calendar.DATE)) + "/" + String.format("%02d", spentToBeEdited.getDate().get(Calendar.MONTH)) + "/" + String.format("%02d", spentToBeEdited.getDate().get(Calendar.YEAR));
+		System.out.println(spentString);
+
 		dateField = new JFormattedTextField(maskFormatter);
-		dateField.setName("Date");
+		dateField.setText(spentString);
 		dateField.setPreferredSize(new Dimension(241, 26));
 		dateField.setFont(MyFonts.H2Plain.getFont());
-		dateField.setForeground(Color.decode(MyColors.SUBTITLE.toString()));
+		dateField.setForeground(Color.decode(MyColors.SUBTITLE2.toString()));
 		dateField.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -141,7 +149,7 @@ public class NewSpentGUI extends JFrame {
 		dateField.addFocusListener(new FocusListener() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				if (dateField.getText().equals("_ /  /    ")) {
+				if (dateField.getText().equals(spentString)) {
 					dateField.setText("");
 					dateField.setForeground(Color.decode(MyColors.TITLE.toString()));
 				}
@@ -149,9 +157,9 @@ public class NewSpentGUI extends JFrame {
 
 			@Override
 			public void focusLost(FocusEvent e) {
-				if (dateField.getText().equals("  /  /    ")) {
-					dateField.setText("");
-					dateField.setForeground(Color.decode(MyColors.SUBTITLE.toString()));
+				if (dateField.getText().equals("_ /  /    ")) {
+					dateField.setText(spentString);
+					dateField.setForeground(Color.decode(MyColors.SUBTITLE2.toString()));
 				}
 			}
 		});
@@ -160,11 +168,11 @@ public class NewSpentGUI extends JFrame {
 		gbc.gridy++;
 		jPanel.add(dateField, gbc);
 
-		valueField = new JFormattedTextField("Value");
-		valueField.setName("Value");
+		valueField = new JFormattedTextField(String.valueOf(spentToBeEdited.getValue()));
+		valueField.setName(String.valueOf(spentToBeEdited.getValue()));
 		valueField.setPreferredSize(new Dimension(241, 26));
 		valueField.setFont(MyFonts.H2Plain.getFont());
-		valueField.setForeground(Color.decode(MyColors.SUBTITLE.toString()));
+		valueField.setForeground(Color.decode(MyColors.SUBTITLE2.toString()));
 		valueField.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -180,7 +188,7 @@ public class NewSpentGUI extends JFrame {
 		valueField.addFocusListener(new FocusListener() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				if (valueField.getText().equals("Value")) {
+				if (valueField.getText().equals(String.valueOf(spentToBeEdited.getValue()))) {
 					valueField.setText("");
 					valueField.setForeground(Color.decode(MyColors.TITLE.toString()));
 				}
@@ -189,8 +197,8 @@ public class NewSpentGUI extends JFrame {
 			@Override
 			public void focusLost(FocusEvent e) {
 				if (valueField.getText().equals("")) {
-					valueField.setText("Value");
-					valueField.setForeground(Color.decode(MyColors.SUBTITLE.toString()));
+					valueField.setText(String.valueOf(spentToBeEdited.getValue()));
+					valueField.setForeground(Color.decode(MyColors.SUBTITLE2.toString()));
 				}
 			}
 		});
@@ -203,62 +211,75 @@ public class NewSpentGUI extends JFrame {
 		categoryField.setPreferredSize(new Dimension(238, 26));
 		categoryField.setFont(MyFonts.H2Plain.getFont());
 		categoryField.setForeground(Color.decode(MyColors.TITLE.toString()));
+		int categoryValuesIndex = 0;
+		for (Category category : Category.values()) {
+			if (category.equals(spentToBeEdited.getCategory())) {
+				categoryField.setSelectedIndex(categoryValuesIndex);
+			}
+			categoryValuesIndex++;
+		}
 
-		categoryField.setSelectedIndex(0);
 		gbc.gridx = 0;
 		gbc.gridy++;
 		jPanel.add(categoryField, gbc);
+		AtomicBoolean ableToEdit = new AtomicBoolean(true);
 
-		JButton registerButton = new JButton("Add");
-		registerButton.setFont(MyFonts.H1Bold.getFont());
-		registerButton.setPreferredSize(new Dimension(238, 26));
-		registerButton.setForeground(Color.WHITE);
-		registerButton.setBackground(Color.decode(MyColors.DARK_GREEN.toString()));
-		registerButton.setBorderPainted(false);
-		registerButton.addActionListener(e -> {
-			Spent newSpent;
+		JButton editButton = new JButton("Edit");
+		editButton.setFont(MyFonts.H1Bold.getFont());
+		editButton.setPreferredSize(new Dimension(238, 26));
+		editButton.setForeground(Color.WHITE);
+		editButton.setBackground(Color.decode(MyColors.DARK_GREEN.toString()));
+		editButton.setBorderPainted(false);
+		editButton.addActionListener(e -> {
 			DateValidator dateValidator = new DateValidator("dd/mm/yyyy");
 			if (!dateValidator.isValid(dateField.getText())) {
 				ErrorMessageGUI errorMessageGUI = new ErrorMessageGUI("Warning, Invalid date!");
 				errorMessageGUI.setVisible(true);
 				return;
 			} else {
-				newSpent = new Spent();
 				Calendar date = Calendar.getInstance();
 				String[] dateStr = dateField.getText().split("/");
 				date.set(Integer.parseInt(dateStr[2]), Integer.parseInt(dateStr[1]), Integer.parseInt(dateStr[0]));
-				newSpent.setDate(date);
+				if (!Objects.equals(spentToBeEdited.getName(), nameField.getText())) {
+					ableToEdit.set(finances.editSpent(spentToBeEdited.getIndex(), 1, nameField.getText()));
+				}
+				if (!Objects.equals(spentToBeEdited.getDescription(), descriptionField.getText())) {
+					ableToEdit.set(finances.editSpent(spentToBeEdited.getIndex(), 2, descriptionField.getText()));
+				}
+				if (!Objects.equals(spentToBeEdited.getDate(), date)) {
+					ableToEdit.set(finances.editSpent(spentToBeEdited.getIndex(), date));
+				}
+
+				try {
+					Float.parseFloat(valueField.getText());
+				} catch (NumberFormatException ex) {
+					ErrorMessageGUI errorMessageGUI = new ErrorMessageGUI("Warning, Invalid value!");
+					errorMessageGUI.setVisible(true);
+					return;
+				}
+
+				float value = Float.parseFloat(valueField.getText());
+				if (!Objects.equals(spentToBeEdited.getValue(), value)) {
+					ableToEdit.set(finances.editSpent(spentToBeEdited.getIndex(), value));
+				}
+				if (!Objects.equals(spentToBeEdited.getCategory(), categoryField.getSelectedItem())) {
+					ableToEdit.set(finances.editSpent(spentToBeEdited.getIndex(), (Category) categoryField.getSelectedItem()));
+				}
 			}
-			newSpent.setIndex(UUID.randomUUID());
-			newSpent.setName(nameField.getText());
-			newSpent.setDescription(descriptionField.getText());
-
-			try {
-				Float.parseFloat(valueField.getText());
-			} catch (NumberFormatException ex) {
-				ErrorMessageGUI errorMessageGUI = new ErrorMessageGUI("Warning, Invalid value!");
-				errorMessageGUI.setVisible(true);
-				return;
-			}
-
-			float value = Float.parseFloat(valueField.getText());
-			newSpent.setValue(value);
-			Object selectedItem = categoryField.getSelectedItem();
-			newSpent.setCategory((Category) selectedItem);
-
-			if (finances.newSpent(newSpent)) {
+			System.out.println(finances.getSpentById(spentToBeEdited.getIndex()));
+			if (ableToEdit.get()) {
 				HomeGUI homeGUI = new HomeGUI(finances);
 				homeGUI.setVisible(true);
 				dispose();
 			} else {
-				ErrorMessageGUI errorMessageGUI = new ErrorMessageGUI("Warning, Unable to add it!");
+				ErrorMessageGUI errorMessageGUI = new ErrorMessageGUI("Warning, Unable to edit it!");
 				errorMessageGUI.setVisible(true);
 			}
 		});
 
 		gbc.gridx = 0;
 		gbc.gridy++;
-		jPanel.add(registerButton, gbc);
+		jPanel.add(editButton, gbc);
 
 		gbc.gridx = 0;
 		gbc.gridy++;

@@ -50,13 +50,13 @@ public class LoginGUI extends JFrame {
 		gbc.insets = new Insets(padding, padding, padding, padding);
 		gbc.anchor = GridBagConstraints.WEST;
 		JLabel usernameLabel = new JLabel("Username");
-		usernameLabel.setFont(MyFonts.H1.getFont());
+		usernameLabel.setFont(MyFonts.H1Bold.getFont());
 		usernameLabel.setForeground(Color.decode(MyColors.TITLE.toString()));
 		jPanel.add(usernameLabel, gbc);
 
 		usernameField = new JTextField("Enter your username", 18);
 		usernameField.setPreferredSize(new Dimension(241, 26));
-		usernameField.setFont(MyFonts.H2.getFont());
+		usernameField.setFont(MyFonts.H2Plain.getFont());
 		usernameField.setForeground(Color.decode(MyColors.SUBTITLE.toString()));
 		usernameField.addFocusListener(new FocusListener() {
 			@Override
@@ -81,7 +81,7 @@ public class LoginGUI extends JFrame {
 		jPanel.add(usernameField, gbc);
 
 		JLabel passwordLabel = new JLabel("Password");
-		passwordLabel.setFont(MyFonts.H1.getFont());
+		passwordLabel.setFont(MyFonts.H1Bold.getFont());
 		passwordLabel.setForeground(Color.decode(MyColors.TITLE.toString()));
 		gbc.gridx = 0;
 		gbc.gridy++;
@@ -89,7 +89,7 @@ public class LoginGUI extends JFrame {
 
 		passwordField = new JPasswordField("Enter your password", 18);
 		passwordField.setPreferredSize(new Dimension(241, 26));
-		passwordField.setFont(MyFonts.H2.getFont());
+		passwordField.setFont(MyFonts.H2Plain.getFont());
 		passwordField.setForeground(Color.decode(MyColors.SUBTITLE.toString()));
 		passwordField.setEchoChar((char) 0);
 		passwordField.addFocusListener(new FocusListener() {
@@ -116,7 +116,7 @@ public class LoginGUI extends JFrame {
 		jPanel.add(passwordField, gbc);
 
 		JButton loginButton = new JButton("Login");
-		loginButton.setFont(MyFonts.H1.getFont());
+		loginButton.setFont(MyFonts.H1Bold.getFont());
 		loginButton.setPreferredSize(new Dimension(238, 26));
 		loginButton.setForeground(Color.WHITE);
 		loginButton.setBackground(Color.decode(MyColors.DARK_GREEN.toString()));
@@ -138,7 +138,7 @@ public class LoginGUI extends JFrame {
 		jPanel.add(loginButton, gbc);
 
 		JButton forgotPasswordButton = new JButton("<html><p>Forgot your <span style=\"color: " + MyColors.BLUE + "\">password</span><span>?</span></p></html>");
-		forgotPasswordButton.setFont(MyFonts.H3.getFont());
+		forgotPasswordButton.setFont(MyFonts.H3Plain.getFont());
 		forgotPasswordButton.setForeground(Color.decode(MyColors.TITLE.toString()));
 		forgotPasswordButton.setOpaque(false);
 		forgotPasswordButton.setContentAreaFilled(false);
@@ -158,7 +158,7 @@ public class LoginGUI extends JFrame {
 		gbc.gridx = 0;
 		gbc.gridy++;
 		JButton signInButton = new JButton("<html><p>Don't have an account? <span style=\"color: " + MyColors.BLUE + "\">Sign in</span></p></html>");
-		signInButton.setFont(MyFonts.H3.getFont());
+		signInButton.setFont(MyFonts.H3Plain.getFont());
 		signInButton.setForeground(Color.decode(MyColors.TITLE.toString()));
 		signInButton.setBackground(Color.WHITE);
 		signInButton.setOpaque(false);

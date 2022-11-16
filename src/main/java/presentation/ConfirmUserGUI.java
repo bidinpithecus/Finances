@@ -52,13 +52,13 @@ public class ConfirmUserGUI extends JFrame {
 		gbc.anchor = GridBagConstraints.CENTER;
 
 		JLabel registerLabel = new JLabel("Confirm that's your user");
-		registerLabel.setFont(MyFonts.H1.getFont());
+		registerLabel.setFont(MyFonts.H1Bold.getFont());
 		registerLabel.setForeground(Color.decode(MyColors.TITLE.toString()));
 		jPanel.add(registerLabel, gbc);
 
 		fullNameField = new JTextField("Full name", 18);
 		fullNameField.setPreferredSize(new Dimension(241, 26));
-		fullNameField.setFont(MyFonts.H2.getFont());
+		fullNameField.setFont(MyFonts.H2Plain.getFont());
 		fullNameField.setForeground(Color.decode(MyColors.SUBTITLE.toString()));
 		fullNameField.addFocusListener(new FocusListener() {
 			@Override
@@ -84,7 +84,7 @@ public class ConfirmUserGUI extends JFrame {
 
 		usernameField = new JTextField("Username", 18);
 		usernameField.setPreferredSize(new Dimension(241, 26));
-		usernameField.setFont(MyFonts.H2.getFont());
+		usernameField.setFont(MyFonts.H2Plain.getFont());
 		usernameField.setForeground(Color.decode(MyColors.SUBTITLE.toString()));
 		usernameField.addFocusListener(new FocusListener() {
 			@Override
@@ -110,7 +110,7 @@ public class ConfirmUserGUI extends JFrame {
 
 		phoneField = new JTextField("Phone", 18);
 		phoneField.setPreferredSize(new Dimension(241, 26));
-		phoneField.setFont(MyFonts.H2.getFont());
+		phoneField.setFont(MyFonts.H2Plain.getFont());
 		phoneField.setForeground(Color.decode(MyColors.SUBTITLE.toString()));
 		phoneField.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
@@ -155,7 +155,7 @@ public class ConfirmUserGUI extends JFrame {
 		birthDateField = new JFormattedTextField(maskFormatter);
 		birthDateField.setName("Birth date");
 		birthDateField.setPreferredSize(new Dimension(241, 26));
-		birthDateField.setFont(MyFonts.H2.getFont());
+		birthDateField.setFont(MyFonts.H2Plain.getFont());
 		birthDateField.setForeground(Color.decode(MyColors.SUBTITLE.toString()));
 		birthDateField.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
@@ -190,7 +190,7 @@ public class ConfirmUserGUI extends JFrame {
 		jPanel.add(birthDateField, gbc);
 
 		JButton checkUser = new JButton("Check");
-		checkUser.setFont(MyFonts.H1.getFont());
+		checkUser.setFont(MyFonts.H1Bold.getFont());
 		checkUser.setPreferredSize(new Dimension(238, 26));
 		checkUser.setForeground(Color.WHITE);
 		checkUser.setBackground(Color.decode(MyColors.DARK_GREEN.toString()));
@@ -228,7 +228,7 @@ public class ConfirmUserGUI extends JFrame {
 		gbc.gridx = 0;
 		gbc.gridy++;
 		JButton returnButton = new JButton("<html><p><span style=\"color: " + MyColors.BLUE + "\">Return</span></p></html>");
-		returnButton.setFont(MyFonts.H3.getFont());
+		returnButton.setFont(MyFonts.H3Plain.getFont());
 		returnButton.setForeground(Color.decode(MyColors.TITLE.toString()));
 		returnButton.setBackground(Color.WHITE);
 		returnButton.setOpaque(false);

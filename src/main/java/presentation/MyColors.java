@@ -3,6 +3,7 @@ package presentation;
 public enum MyColors {
 	TITLE("#383838"),
 	SUBTITLE("#D9D9D9"),
+	SUBTITLE2("#707070"),
 	DARK_GREEN("#2BBF95"),
 	LIGHT_GREEN("#28DEAA"),
 	MUSTARD("#F6BA58"),

@@ -20,11 +20,19 @@ public class Main {
 
 		Calendar spentDate = Calendar.getInstance();
 		spentDate.set(2020, Calendar.FEBRUARY, 1);
-		Spent spent = new Spent(UUID.randomUUID(), "as", spentDate, "Almoço", 20, Category.FOOD);
+		Spent spent = new Spent(UUID.randomUUID(), "Café", spentDate, "Café com amorzinho", 36, Category.FOOD);
 		finances.newSpent(spent);
 
 		spentDate.set(2020, Calendar.FEBRUARY, 1);
-		spent = new Spent(UUID.randomUUID(), "Ifooasdasdasdd", spentDate, "Janta", 30, Category.FOOD);
+		spent = new Spent(UUID.randomUUID(), "Cabo", spentDate, "2 Cabos usb", 18, Category.FUN);
+		finances.newSpent(spent);
+
+		spentDate.set(2020, Calendar.FEBRUARY, 1);
+		spent = new Spent(UUID.randomUUID(), "Uber", spentDate, "Casa da namo", 14, Category.TRANSPORTATION);
+		finances.newSpent(spent);
+
+		spentDate.set(2020, Calendar.FEBRUARY, 1);
+		spent = new Spent(UUID.randomUUID(), "Uber", spentDate, "Minha casa", 16, Category.TRANSPORTATION);
 		finances.newSpent(spent);
 
 		new HomeGUI(finances);

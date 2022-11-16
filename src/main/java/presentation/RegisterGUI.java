@@ -56,13 +56,13 @@ public class RegisterGUI extends JFrame {
 		gbc.anchor = GridBagConstraints.CENTER;
 
 		JLabel registerLabel = new JLabel("Register");
-		registerLabel.setFont(MyFonts.H1.getFont());
+		registerLabel.setFont(MyFonts.H1Bold.getFont());
 		registerLabel.setForeground(Color.decode(MyColors.TITLE.toString()));
 		jPanel.add(registerLabel, gbc);
 
 		fullNameField = new JTextField("Full name", 18);
 		fullNameField.setPreferredSize(new Dimension(241, 26));
-		fullNameField.setFont(MyFonts.H2.getFont());
+		fullNameField.setFont(MyFonts.H2Plain.getFont());
 		fullNameField.setForeground(Color.decode(MyColors.SUBTITLE.toString()));
 		fullNameField.addFocusListener(new FocusListener() {
 			@Override
@@ -88,7 +88,7 @@ public class RegisterGUI extends JFrame {
 
 		usernameField = new JTextField("Username", 18);
 		usernameField.setPreferredSize(new Dimension(241, 26));
-		usernameField.setFont(MyFonts.H2.getFont());
+		usernameField.setFont(MyFonts.H2Plain.getFont());
 		usernameField.setForeground(Color.decode(MyColors.SUBTITLE.toString()));
 		usernameField.addFocusListener(new FocusListener() {
 			@Override
@@ -114,7 +114,7 @@ public class RegisterGUI extends JFrame {
 
 		phoneField = new JTextField("Phone", 18);
 		phoneField.setPreferredSize(new Dimension(241, 26));
-		phoneField.setFont(MyFonts.H2.getFont());
+		phoneField.setFont(MyFonts.H2Plain.getFont());
 		phoneField.setForeground(Color.decode(MyColors.SUBTITLE.toString()));
 		phoneField.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
@@ -159,7 +159,7 @@ public class RegisterGUI extends JFrame {
 		birthDateField = new JFormattedTextField(maskFormatter);
 		birthDateField.setName("Birth date");
 		birthDateField.setPreferredSize(new Dimension(241, 26));
-		birthDateField.setFont(MyFonts.H2.getFont());
+		birthDateField.setFont(MyFonts.H2Plain.getFont());
 		birthDateField.setForeground(Color.decode(MyColors.SUBTITLE.toString()));
 		birthDateField.addKeyListener(new KeyAdapter() {
 			public void keyTyped(KeyEvent e) {
@@ -196,7 +196,7 @@ public class RegisterGUI extends JFrame {
 
 		passwordField = new JPasswordField("Password", 18);
 		passwordField.setPreferredSize(new Dimension(241, 26));
-		passwordField.setFont(MyFonts.H2.getFont());
+		passwordField.setFont(MyFonts.H2Plain.getFont());
 		passwordField.setForeground(Color.decode(MyColors.SUBTITLE.toString()));
 		passwordField.setEchoChar((char) 0);
 		passwordField.addFocusListener(new FocusListener() {
@@ -224,7 +224,7 @@ public class RegisterGUI extends JFrame {
 
 		passwordConfirmationField = new JPasswordField("Confirm password", 18);
 		passwordConfirmationField.setPreferredSize(new Dimension(241, 26));
-		passwordConfirmationField.setFont(MyFonts.H2.getFont());
+		passwordConfirmationField.setFont(MyFonts.H2Plain.getFont());
 		passwordConfirmationField.setForeground(Color.decode(MyColors.SUBTITLE.toString()));
 		passwordConfirmationField.setEchoChar((char) 0);
 		passwordConfirmationField.addFocusListener(new FocusListener() {
@@ -251,7 +251,7 @@ public class RegisterGUI extends JFrame {
 		jPanel.add(passwordConfirmationField, gbc);
 
 		JButton registerButton = new JButton("Register");
-		registerButton.setFont(MyFonts.H1.getFont());
+		registerButton.setFont(MyFonts.H1Bold.getFont());
 		registerButton.setPreferredSize(new Dimension(238, 26));
 		registerButton.setForeground(Color.WHITE);
 		registerButton.setBackground(Color.decode(MyColors.DARK_GREEN.toString()));
@@ -295,7 +295,7 @@ public class RegisterGUI extends JFrame {
 		gbc.gridx = 0;
 		gbc.gridy++;
 		JButton loginButton = new JButton("<html><p>Already have an account? <span style=\"color: " + MyColors.BLUE + "\">Login</span></p></html>");
-		loginButton.setFont(MyFonts.H3.getFont());
+		loginButton.setFont(MyFonts.H3Plain.getFont());
 		loginButton.setForeground(Color.decode(MyColors.TITLE.toString()));
 		loginButton.setBackground(Color.WHITE);
 		loginButton.setOpaque(false);

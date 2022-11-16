@@ -91,21 +91,21 @@ public class Finances {
 
     public boolean spentExists(UUID id) {
         if (!isUserLogged()) {
-            return false;
+            return true;
         }
         for (Spent spent : listSpent()) {
             if (spent.getIndex().equals(id)) {
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     public Spent getSpentById(UUID id) {
         if (!isUserLogged()) {
             return null;
         }
-        if (!spentExists(id)) {
+        if (spentExists(id)) {
             return null;
         }
         for (Spent spent : listSpent()) {
@@ -118,7 +118,7 @@ public class Finances {
 
     public boolean deleteSpent(UUID id) {
         if (isUserLogged()) {
-            if (!spentExists(id)) {
+            if (spentExists(id)) {
                 return false;
             }
             users.get(logged).remove(getSpentById(id));
@@ -162,7 +162,7 @@ public class Finances {
     // By string, change either the name or description
     public boolean editSpent(UUID id, int property, String content) {
         if (isUserLogged()) {
-            if (!spentExists(id)) {
+            if (spentExists(id)) {
                 return false;
             }
             if (property == 1) {
@@ -179,7 +179,7 @@ public class Finances {
 
     public boolean editSpent(UUID id, Calendar date) {
         if (isUserLogged()) {
-            if (!spentExists(id)) {
+            if (spentExists(id)) {
                 return false;
             }
             users.get(logged).get(listSpent().indexOf(getSpentById(id))).setDate(date);
@@ -190,7 +190,7 @@ public class Finances {
 
     public boolean editSpent(UUID id, float value) {
         if (isUserLogged()) {
-            if (!spentExists(id)) {
+            if (spentExists(id)) {
                 return false;
             }
             users.get(logged).get(listSpent().indexOf(getSpentById(id))).setValue(value);
@@ -201,7 +201,7 @@ public class Finances {
 
     public boolean editSpent(UUID id, Category category) {
         if (isUserLogged()) {
-            if (!spentExists(id)) {
+            if (spentExists(id)) {
                 return false;
             }
             users.get(logged).get(listSpent().indexOf(getSpentById(id))).setCategory(category);

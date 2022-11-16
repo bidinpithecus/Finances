@@ -3,9 +3,12 @@ package presentation;
 import java.awt.*;
 
 public enum MyFonts {
-	H1("Consolas", Font.BOLD, 18),
-	H2("Consolas", Font.PLAIN, 14),
-	H3("Consolas", Font.PLAIN, 12),
+	H1Bold("Consolas", Font.BOLD, 18),
+	H1Plain("Consolas", Font.PLAIN, 18),
+	H2Plain("Consolas", Font.PLAIN, 14),
+	H2Bold("Consolas", Font.BOLD, 14),
+	H3Plain("Consolas", Font.PLAIN, 12),
+	H3Bold("Consolas", Font.BOLD, 12),
 	;
 
 	private final String font;

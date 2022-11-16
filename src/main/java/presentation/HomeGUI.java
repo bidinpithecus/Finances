@@ -37,6 +37,11 @@ public class HomeGUI extends JFrame {
 		setResizable(false);
 		setTitle("Home");
 		add(jPanel);
+
+		JScrollPane scrollPane = new JScrollPane(jPanel);
+		scrollPane.createVerticalScrollBar();
+
+		add(scrollPane);
 		pack();
 		setSize(800, 600);
 		setLocationRelativeTo(null);
@@ -48,7 +53,7 @@ public class HomeGUI extends JFrame {
 		gbc.insets = new Insets(padding, padding, padding, padding);
 		gbc.anchor = GridBagConstraints.WEST;
 		JLabel presentation = new JLabel("Hello, " + finances.getLogged().getName());
-		presentation.setFont(MyFonts.H1.getFont());
+		presentation.setFont(MyFonts.H1Bold.getFont());
 		presentation.setForeground(Color.decode(MyColors.TITLE.toString()));
 		jPanel.add(presentation, gbc);
 
@@ -56,12 +61,23 @@ public class HomeGUI extends JFrame {
 		gbc.gridy++;
 		gbc.anchor = GridBagConstraints.WEST;
 		JLabel activitiesLabel = new JLabel("Activities");
-		activitiesLabel.setFont(MyFonts.H1.getFont());
+		activitiesLabel.setFont(MyFonts.H1Bold.getFont());
 		activitiesLabel.setForeground(Color.decode(MyColors.TITLE.toString()));
 		jPanel.add(activitiesLabel, gbc);
 
+		Icon filterIcon = new ImageIcon("src/main/java/presentation/images/filter.png");
+		JButton filterButton = new JButton(filterIcon);
+		filterButton.setMargin(new Insets(0, 0, 0, 0));
+		filterButton.setBackground(Color.WHITE);
+		filterButton.setBorder(null);
+		filterButton.addActionListener(e -> {
+			System.out.println("filter");
+		});
+		gbc.gridy++;
+		jPanel.add(filterButton, gbc);
+
 		JButton newSpentButton = new JButton("New Spent");
-		newSpentButton.setFont(MyFonts.H2.getFont());
+		newSpentButton.setFont(MyFonts.H2Plain.getFont());
 		newSpentButton.setPreferredSize(new Dimension(160, 26));
 		newSpentButton.setForeground(Color.WHITE);
 		newSpentButton.setBackground(Color.decode(MyColors.DARK_GREEN.toString()));
@@ -88,45 +104,104 @@ public class HomeGUI extends JFrame {
 				"</div>\n" +
 				"</body>\n" +
 				"</html>");
-		hrLabel.setFont(MyFonts.H1.getFont());
+		hrLabel.setFont(MyFonts.H1Bold.getFont());
 		hrLabel.setForeground(Color.decode(MyColors.TITLE.toString()));
 		jPanel.add(hrLabel, gbc);
 
 		gbc.anchor = GridBagConstraints.CENTER;
 		if (finances.listSpent().isEmpty()) {
 			JLabel noActivitiesLabel = new JLabel("No activities registered");
-			noActivitiesLabel.setFont(MyFonts.H1.getFont());
+			noActivitiesLabel.setFont(MyFonts.H1Bold.getFont());
 			noActivitiesLabel.setForeground(Color.decode(MyColors.TITLE.toString()));
 			jPanel.add(noActivitiesLabel, gbc);
 		} else {
+			Icon editIcon = new ImageIcon("src/main/java/presentation/images/edit.png");
+			Icon deleteIcon = new ImageIcon("src/main/java/presentation/images/delete.png");
 			gbc.anchor = GridBagConstraints.WEST;
 			for (Spent spent : finances.listSpent()) {
 				JPanel spentPanel = new JPanel();
 				spentPanel.setLayout(new GridBagLayout());
 				GridBagConstraints gbcSpent = new GridBagConstraints();
-				setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+				gbcSpent.insets = new Insets(padding, padding, padding, padding);
 				spentPanel.setBackground(Color.WHITE);
 
-				JLabel titleLabel = new JLabel("Ifood");
-				titleLabel.setFont(MyFonts.H2.getFont());
+				JLabel categoryLabel = new JLabel(spent.getCategory().toString());
+				categoryLabel.setFont(MyFonts.H2Bold.getFont());
+				categoryLabel.setForeground(Color.decode(MyColors.TITLE.toString()));
+				categoryLabel.setBackground(Color.WHITE);
+				categoryLabel.setOpaque(false);
+				gbcSpent.anchor = GridBagConstraints.WEST;
+				gbcSpent.gridx = 0;
+				gbcSpent.gridy = 0;
+				spentPanel.add(categoryLabel, gbcSpent);
+
+				JLabel titleLabel = new JLabel(spent.getName());
+				titleLabel.setFont(MyFonts.H2Plain.getFont());
 				titleLabel.setForeground(Color.decode(MyColors.TITLE.toString()));
 				titleLabel.setBackground(Color.WHITE);
 				titleLabel.setOpaque(false);
-				gbcSpent.gridx = 0;
 				gbcSpent.gridy++;
 				spentPanel.add(titleLabel, gbcSpent);
 
-				JLabel priceLabel = new JLabel("$12");
-				priceLabel.setFont(MyFonts.H2.getFont());
+				JLabel dateLabel = new JLabel(spent.getDate().get(Calendar.DATE) + "/" + spent.getDate().get(Calendar.MONTH) + "/" + spent.getDate().get(Calendar.YEAR));
+				dateLabel.setFont(MyFonts.H2Plain.getFont());
+				dateLabel.setForeground(Color.decode(MyColors.TITLE.toString()));
+				dateLabel.setBackground(Color.WHITE);
+				dateLabel.setOpaque(false);
+				gbcSpent.gridx++;
+				spentPanel.add(dateLabel, gbcSpent);
+
+				JLabel priceLabel = new JLabel("R$" + spent.getValue());
+				priceLabel.setFont(MyFonts.H2Plain.getFont());
 				priceLabel.setForeground(Color.decode(MyColors.TITLE.toString()));
 				priceLabel.setBackground(Color.WHITE);
 				priceLabel.setOpaque(false);
 				gbcSpent.gridx++;
 				spentPanel.add(priceLabel, gbcSpent);
 
+				JLabel descriptionLabel = new JLabel(spent.getDescription());
+				descriptionLabel.setFont(MyFonts.H3Plain.getFont());
+				descriptionLabel.setForeground(Color.decode(MyColors.TITLE.toString()));
+				descriptionLabel.setBackground(Color.WHITE);
+				descriptionLabel.setOpaque(false);
+				gbcSpent.gridx = 0;
+				gbcSpent.gridy++;
+				spentPanel.add(descriptionLabel, gbcSpent);
+
 				gbc.gridx = 0;
 				gbc.gridy++;
 				jPanel.add(spentPanel, gbc);
+
+				JPanel buttonsPanel = new JPanel();
+				buttonsPanel.setLayout(new GridBagLayout());
+				GridBagConstraints gbcButtons = new GridBagConstraints();
+				gbcButtons.anchor = GridBagConstraints.WEST;
+				gbcButtons.insets = new Insets(padding, padding, padding, padding);
+				buttonsPanel.setBackground(Color.WHITE);
+
+				JButton editButton = new JButton(editIcon);
+				editButton.setMargin(new Insets(0, 0, 0, 0));
+				editButton.setBackground(Color.decode(MyColors.MUSTARD.toString()));
+				editButton.setBorder(null);
+				editButton.addActionListener(e -> {
+					EditSpentGUI editSpentGUI = new EditSpentGUI(finances, spent.getIndex());
+					editSpentGUI.setVisible(true);
+					dispose();
+				});
+				gbcButtons.gridx = 0;
+				gbcButtons.gridy = gbcSpent.gridy + 1;
+				spentPanel.add(editButton, gbcButtons);
+
+				JButton deleteButton = new JButton(deleteIcon);
+				deleteButton.setMargin(new Insets(0, 0, 0, 0));
+				deleteButton.setBackground(Color.decode(MyColors.RED.toString()));
+				deleteButton.setBorder(null);
+				gbcButtons.gridx++;
+				spentPanel.add(deleteButton, gbcButtons);
+
+				gbc.gridx = 0;
+				gbc.gridy++;
+				jPanel.add(buttonsPanel, gbc);
 
 				gbc.gridx = 0;
 				gbc.gridy++;
@@ -142,7 +217,7 @@ public class HomeGUI extends JFrame {
 						"</div>\n" +
 						"</body>\n" +
 						"</html>");
-				hrLoopLabel.setFont(MyFonts.H1.getFont());
+				hrLoopLabel.setFont(MyFonts.H1Bold.getFont());
 				hrLoopLabel.setForeground(Color.decode(MyColors.TITLE.toString()));
 				jPanel.add(hrLoopLabel, gbc);
 

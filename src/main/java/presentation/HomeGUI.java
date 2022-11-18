@@ -1,18 +1,46 @@
 package presentation;
 
 import business.Finances;
+import data.Category;
 import data.Spent;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 import java.util.Calendar;
 
 public class HomeGUI extends JFrame {
 	private static Finances finances;
+	private List<Spent> spentsOfLoggedUser;
 
 	public HomeGUI(Finances finances) {
 		if (finances.isUserLogged()) {
 			HomeGUI.finances = finances;
+			spentsOfLoggedUser = finances.listSpent();
+			initComponents();
+		} else {
+			LoginGUI loginGUI = new LoginGUI(finances);
+			loginGUI.setVisible(true);
+			dispose();
+		}
+	}
+
+	public HomeGUI(Finances finances, int monthOfFilter) {
+		if (finances.isUserLogged()) {
+			HomeGUI.finances = finances;
+			spentsOfLoggedUser = finances.listSpent(monthOfFilter);
+			initComponents();
+		} else {
+			LoginGUI loginGUI = new LoginGUI(finances);
+			loginGUI.setVisible(true);
+			dispose();
+		}
+	}
+
+	public HomeGUI(Finances finances, Category category) {
+		if (finances.isUserLogged()) {
+			HomeGUI.finances = finances;
+			spentsOfLoggedUser = finances.listSpent(category);
 			initComponents();
 		} else {
 			LoginGUI loginGUI = new LoginGUI(finances);
@@ -52,6 +80,26 @@ public class HomeGUI extends JFrame {
 		gbc.gridy = 0;
 		gbc.insets = new Insets(padding, padding, padding, padding);
 		gbc.anchor = GridBagConstraints.WEST;
+
+		JButton logoffButton = new JButton("<html><p><span style=\"color: " + MyColors.BLUE + "\">Logoff</span></p></html>");
+		logoffButton.setFont(MyFonts.H3Plain.getFont());
+		logoffButton.setForeground(Color.decode(MyColors.TITLE.toString()));
+		logoffButton.setBackground(Color.WHITE);
+		logoffButton.setOpaque(false);
+		logoffButton.setContentAreaFilled(false);
+		logoffButton.setBorderPainted(false);
+		logoffButton.setFocusPainted(false);
+		logoffButton.addActionListener(e -> {
+			finances.logoff();
+			LoginGUI loginGUI = new LoginGUI(finances);
+			loginGUI.setVisible(true);
+			dispose();
+		});
+		jPanel.add(logoffButton, gbc);
+
+		gbc.gridx = 0;
+		gbc.gridy++;
+
 		JLabel presentation = new JLabel("Hello, " + finances.getLogged().getName());
 		presentation.setFont(MyFonts.H1Bold.getFont());
 		presentation.setForeground(Color.decode(MyColors.TITLE.toString()));
@@ -71,7 +119,9 @@ public class HomeGUI extends JFrame {
 		filterButton.setBackground(Color.WHITE);
 		filterButton.setBorder(null);
 		filterButton.addActionListener(e -> {
-			System.out.println("filter");
+			FilterGUI filterGUI = new FilterGUI(finances);
+			filterGUI.setVisible(true);
+			dispose();
 		});
 		gbc.gridy++;
 		jPanel.add(filterButton, gbc);
@@ -92,24 +142,27 @@ public class HomeGUI extends JFrame {
 
 		gbc.gridx = 0;
 		gbc.gridy++;
-		JLabel hrLabel = new JLabel("<html>\n" +
-				"<head>\n" +
-				"<style type=\"text/css\">\n" +
-				"body { margin: 0; width: 300px; }\n" +
-				"</style>\n" +
-				"</head>\n" +
-				"<body>\n" +
-				"<div>\n" +
-				"<hr>\n" +
-				"</div>\n" +
-				"</body>\n" +
-				"</html>");
+		JLabel hrLabel = new JLabel("""
+				<html>
+				<head>
+				<style type="text/css">
+				body { margin: 0; width: 300px; }
+				</style>
+				</head>
+				<body>
+				<div>
+				<hr>
+				</div>
+				</body>
+				</html>""");
 		hrLabel.setFont(MyFonts.H1Bold.getFont());
 		hrLabel.setForeground(Color.decode(MyColors.TITLE.toString()));
 		jPanel.add(hrLabel, gbc);
 
 		gbc.anchor = GridBagConstraints.CENTER;
 		if (finances.listSpent().isEmpty()) {
+			gbc.gridx = 0;
+			gbc.gridy++;
 			JLabel noActivitiesLabel = new JLabel("No activities registered");
 			noActivitiesLabel.setFont(MyFonts.H1Bold.getFont());
 			noActivitiesLabel.setForeground(Color.decode(MyColors.TITLE.toString()));
@@ -118,7 +171,7 @@ public class HomeGUI extends JFrame {
 			Icon editIcon = new ImageIcon("src/main/java/presentation/images/edit.png");
 			Icon deleteIcon = new ImageIcon("src/main/java/presentation/images/delete.png");
 			gbc.anchor = GridBagConstraints.WEST;
-			for (Spent spent : finances.listSpent()) {
+			for (Spent spent : spentsOfLoggedUser) {
 				JPanel spentPanel = new JPanel();
 				spentPanel.setLayout(new GridBagLayout());
 				GridBagConstraints gbcSpent = new GridBagConstraints();
@@ -196,6 +249,11 @@ public class HomeGUI extends JFrame {
 				deleteButton.setMargin(new Insets(0, 0, 0, 0));
 				deleteButton.setBackground(Color.decode(MyColors.RED.toString()));
 				deleteButton.setBorder(null);
+				deleteButton.addActionListener(e -> {
+					DeleteSpentGUI deleteSpentGUI = new DeleteSpentGUI(finances, spent.getIndex());
+					deleteSpentGUI.setVisible(true);
+					dispose();
+				});
 				gbcButtons.gridx++;
 				spentPanel.add(deleteButton, gbcButtons);
 
@@ -205,22 +263,22 @@ public class HomeGUI extends JFrame {
 
 				gbc.gridx = 0;
 				gbc.gridy++;
-				JLabel hrLoopLabel = new JLabel("<html>\n" +
-						"<head>\n" +
-						"<style type=\"text/css\">\n" +
-						"body { margin: 0; width: 300px; }\n" +
-						"</style>\n" +
-						"</head>\n" +
-						"<body>\n" +
-						"<div>\n" +
-						"<hr>\n" +
-						"</div>\n" +
-						"</body>\n" +
-						"</html>");
+				JLabel hrLoopLabel = new JLabel("""
+						<html>
+						<head>
+						<style type="text/css">
+						body { margin: 0; width: 300px; }
+						</style>
+						</head>
+						<body>
+						<div>
+						<hr>
+						</div>
+						</body>
+						</html>""");
 				hrLoopLabel.setFont(MyFonts.H1Bold.getFont());
 				hrLoopLabel.setForeground(Color.decode(MyColors.TITLE.toString()));
 				jPanel.add(hrLoopLabel, gbc);
-
 			}
 		}
 

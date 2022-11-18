@@ -21,7 +21,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class EditSpentGUI extends JFrame {
 	private static Finances finances;
-	private Spent spentToBeEdited;
+	private final Spent spentToBeEdited;
 	private JTextField nameField;
 	private JTextField descriptionField;
 	private JFormattedTextField dateField;
@@ -61,10 +61,10 @@ public class EditSpentGUI extends JFrame {
 		gbc.insets = new Insets(padding, padding, padding, padding);
 		gbc.anchor = GridBagConstraints.CENTER;
 
-		JLabel registerLabel = new JLabel("Edit spent");
-		registerLabel.setFont(MyFonts.H1Bold.getFont());
-		registerLabel.setForeground(Color.decode(MyColors.TITLE.toString()));
-		jPanel.add(registerLabel, gbc);
+		JLabel editSpentLabel = new JLabel("Edit spent");
+		editSpentLabel.setFont(MyFonts.H1Bold.getFont());
+		editSpentLabel.setForeground(Color.decode(MyColors.TITLE.toString()));
+		jPanel.add(editSpentLabel, gbc);
 
 		nameField = new JTextField(spentToBeEdited.getName(), 18);
 		nameField.setPreferredSize(new Dimension(241, 26));
@@ -292,7 +292,7 @@ public class EditSpentGUI extends JFrame {
 		returnButton.setBorderPainted(false);
 		returnButton.setFocusPainted(false);
 		returnButton.addActionListener(e -> {
-			JFrame loginGUI = new LoginGUI(finances);
+			LoginGUI loginGUI = new LoginGUI(finances);
 			loginGUI.setVisible(true);
 			dispose();
 		});

@@ -210,7 +210,7 @@ public class ConfirmUserGUI extends JFrame {
 					String[] dateStr = birthDateField.getText().split("/");
 					birthDate.set(Integer.parseInt(dateStr[2]), Integer.parseInt(dateStr[1]), Integer.parseInt(dateStr[0]));
 					if (finances.confirmedUser(fullNameField.getText(), usernameField.getText(), phoneField.getText(), birthDate)) {
-						JFrame changePasswordGUI = new ChangePasswordGUI(finances);
+						ChangePasswordGUI changePasswordGUI = new ChangePasswordGUI(finances);
 						dispose();
 						changePasswordGUI.setVisible(true);
 					} else {
@@ -236,7 +236,7 @@ public class ConfirmUserGUI extends JFrame {
 		returnButton.setBorderPainted(false);
 		returnButton.setFocusPainted(false);
 		returnButton.addActionListener(e -> {
-			JFrame loginGUI = new LoginGUI(finances);
+			LoginGUI loginGUI = new LoginGUI(finances);
 			loginGUI.setVisible(true);
 			dispose();
 		});

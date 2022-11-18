@@ -114,7 +114,7 @@ public class ChangePasswordGUI extends JFrame {
 		changeButton.addActionListener(e -> {
 			if (Arrays.equals(passwordField.getPassword(), passwordConfirmationField.getPassword())) {
 				if (finances.changePassword(finances.getLogged().getName(), finances.getLogged().getLogin(), finances.getLogged().getPhone(), finances.getLogged().getBirthDate(), passwordField.getPassword())) {
-					JFrame loginGUI = new LoginGUI(finances);
+					LoginGUI loginGUI = new LoginGUI(finances);
 					loginGUI.setVisible(true);
 					dispose();
 				} else {

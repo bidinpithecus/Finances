@@ -271,7 +271,7 @@ public class NewSpentGUI extends JFrame {
 		returnButton.setBorderPainted(false);
 		returnButton.setFocusPainted(false);
 		returnButton.addActionListener(e -> {
-			JFrame loginGUI = new LoginGUI(finances);
+			LoginGUI loginGUI = new LoginGUI(finances);
 			loginGUI.setVisible(true);
 			dispose();
 		});

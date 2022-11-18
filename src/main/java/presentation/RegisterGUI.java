@@ -273,7 +273,7 @@ public class RegisterGUI extends JFrame {
 						birthDate.set(Integer.parseInt(dateStr[2]), Integer.parseInt(dateStr[1]), Integer.parseInt(dateStr[0]));
 						User user = new User(fullNameField.getText(), usernameField.getText(), passwordField.getPassword(), phoneField.getText(), birthDate);
 						if (finances.newUser(user)) {
-							JFrame loginGUI = new LoginGUI(finances);
+							LoginGUI loginGUI = new LoginGUI(finances);
 							loginGUI.setVisible(true);
 							dispose();
 						} else {
@@ -303,7 +303,7 @@ public class RegisterGUI extends JFrame {
 		loginButton.setBorderPainted(false);
 		loginButton.setFocusPainted(false);
 		loginButton.addActionListener(e -> {
-			JFrame loginGUI = new LoginGUI(finances);
+			LoginGUI loginGUI = new LoginGUI(finances);
 			loginGUI.setVisible(true);
 			dispose();
 		});

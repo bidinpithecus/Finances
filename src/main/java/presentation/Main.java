@@ -16,11 +16,11 @@ public class Main {
 
 		User user = new User("User", "user", "123".toCharArray(), "123123123", birthDate);
 		finances.newUser(user);
-		finances.login("user", new char[]{'1','2','3'});
+		finances.login("user", new char[]{'1', '2', '3'});
 
 		Calendar spentDate = Calendar.getInstance();
 		spentDate.set(2020, Calendar.FEBRUARY, 1);
-		Spent spent = new Spent(UUID.randomUUID(), "Café", spentDate, "Café com amorzinho", 36, Category.FOOD);
+		Spent spent = new Spent(UUID.randomUUID(), "Café", spentDate, "Caféeee", 36, Category.FOOD);
 		finances.newSpent(spent);
 
 		spentDate.set(2020, Calendar.FEBRUARY, 1);
@@ -28,11 +28,11 @@ public class Main {
 		finances.newSpent(spent);
 
 		spentDate.set(2020, Calendar.FEBRUARY, 1);
-		spent = new Spent(UUID.randomUUID(), "Uber", spentDate, "Casa da namo", 14, Category.TRANSPORTATION);
+		spent = new Spent(UUID.randomUUID(), "Uber", spentDate, "Faculdade", 14, Category.TRANSPORTATION);
 		finances.newSpent(spent);
 
 		spentDate.set(2020, Calendar.FEBRUARY, 1);
-		spent = new Spent(UUID.randomUUID(), "Uber", spentDate, "Minha casa", 16, Category.TRANSPORTATION);
+		spent = new Spent(UUID.randomUUID(), "Uber", spentDate, "Casa", 16, Category.TRANSPORTATION);
 		finances.newSpent(spent);
 
 		new HomeGUI(finances);

@@ -78,7 +78,7 @@ public class Finances {
     }
 
     public boolean isUserLogged() {
-        return logged != null;
+        return logged.getLogin() != null;
     }
 
     public boolean newSpent(Spent spent) {

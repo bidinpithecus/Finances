@@ -73,7 +73,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "Nome: " + name + ", Telefone: " + phone + ", Nascimento: " + birthDate.get(Calendar.DATE) + "/" + birthDate.get(Calendar.MONTH) + "/" + birthDate.get(Calendar.YEAR) + ", Lista de despesas: " + spents;
+        return "Name: " + name + ", Phone: " + phone + ", Birthday: " + birthDate.get(Calendar.DATE) + "/" + birthDate.get(Calendar.MONTH) + "/" + birthDate.get(Calendar.YEAR) + ", Spent list: " + spents;
    }
 
     @Override

@@ -18,21 +18,24 @@ public class Main {
 		finances.newUser(user);
 		finances.login("user", new char[]{'1', '2', '3'});
 
-		Calendar spentDate = Calendar.getInstance();
-		spentDate.set(2020, Calendar.FEBRUARY, 1);
-		Spent spent = new Spent(UUID.randomUUID(), "Café", spentDate, "Caféeee", 36, Category.FOOD);
+		Calendar spentDate0 = Calendar.getInstance();
+		spentDate0.set(2020, Calendar.FEBRUARY, 1);
+		Spent spent = new Spent(UUID.randomUUID(), "Café", spentDate0, "Caféeee", 36, Category.FOOD);
 		finances.newSpent(spent);
 
-		spentDate.set(2020, Calendar.FEBRUARY, 1);
-		spent = new Spent(UUID.randomUUID(), "Cabo", spentDate, "2 Cabos usb", 18, Category.FUN);
+		Calendar spentDate1 = Calendar.getInstance();
+		spentDate1.set(2020, Calendar.MARCH, 1);
+		spent = new Spent(UUID.randomUUID(), "Cabo", spentDate1, "2 Cabos usb", 18, Category.FUN);
 		finances.newSpent(spent);
 
-		spentDate.set(2020, Calendar.FEBRUARY, 1);
-		spent = new Spent(UUID.randomUUID(), "Uber", spentDate, "Faculdade", 14, Category.TRANSPORTATION);
+		Calendar spentDate2 = Calendar.getInstance();
+		spentDate2.set(2020, Calendar.APRIL, 1);
+		spent = new Spent(UUID.randomUUID(), "Uber", spentDate2, "Faculdade", 14, Category.TRANSPORTATION);
 		finances.newSpent(spent);
 
-		spentDate.set(2020, Calendar.FEBRUARY, 1);
-		spent = new Spent(UUID.randomUUID(), "Uber", spentDate, "Casa", 16, Category.TRANSPORTATION);
+		Calendar spentDate3 = Calendar.getInstance();
+		spentDate3.set(2020, Calendar.APRIL, 1);
+		spent = new Spent(UUID.randomUUID(), "Uber", spentDate3, "Casa", 16, Category.TRANSPORTATION);
 		finances.newSpent(spent);
 
 		new HomeGUI(finances);

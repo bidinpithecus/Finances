@@ -11,12 +11,12 @@ import java.util.Calendar;
 
 public class HomeGUI extends JFrame {
 	private static Finances finances;
-	private List<Spent> spentsOfLoggedUser;
+	private List<Spent> spentsToBeListed;
 
 	public HomeGUI(Finances finances) {
 		if (finances.isUserLogged()) {
 			HomeGUI.finances = finances;
-			spentsOfLoggedUser = finances.listSpent();
+			spentsToBeListed = finances.listSpent();
 			initComponents();
 		} else {
 			LoginGUI loginGUI = new LoginGUI(finances);
@@ -28,7 +28,7 @@ public class HomeGUI extends JFrame {
 	public HomeGUI(Finances finances, int monthOfFilter) {
 		if (finances.isUserLogged()) {
 			HomeGUI.finances = finances;
-			spentsOfLoggedUser = finances.listSpent(monthOfFilter);
+			spentsToBeListed = finances.listSpent(monthOfFilter);
 			initComponents();
 		} else {
 			LoginGUI loginGUI = new LoginGUI(finances);
@@ -40,7 +40,7 @@ public class HomeGUI extends JFrame {
 	public HomeGUI(Finances finances, Category category) {
 		if (finances.isUserLogged()) {
 			HomeGUI.finances = finances;
-			spentsOfLoggedUser = finances.listSpent(category);
+			spentsToBeListed = finances.listSpent(category);
 			initComponents();
 		} else {
 			LoginGUI loginGUI = new LoginGUI(finances);
@@ -168,10 +168,40 @@ public class HomeGUI extends JFrame {
 			noActivitiesLabel.setForeground(Color.decode(MyColors.TITLE.toString()));
 			jPanel.add(noActivitiesLabel, gbc);
 		} else {
+			gbc.anchor = GridBagConstraints.WEST;
+			JButton barChartButton = new JButton("Bar chart");
+			barChartButton.setFont(MyFonts.H2Plain.getFont());
+			barChartButton.setPreferredSize(new Dimension(160, 26));
+			barChartButton.setForeground(Color.WHITE);
+			barChartButton.setBackground(Color.decode(MyColors.DARK_GREEN.toString()));
+			barChartButton.setBorderPainted(false);
+			barChartButton.addActionListener(e -> {
+				BarChartGUI barChartGUI = new BarChartGUI(finances);
+				barChartGUI.setVisible(true);
+				dispose();
+			});
+			gbc.gridx = 0;
+			gbc.gridy++;
+			jPanel.add(barChartButton, gbc);
+
+			JButton scatterChartButton = new JButton("Scatter chart");
+			scatterChartButton.setFont(MyFonts.H2Plain.getFont());
+			scatterChartButton.setPreferredSize(new Dimension(160, 26));
+			scatterChartButton.setForeground(Color.WHITE);
+			scatterChartButton.setBackground(Color.decode(MyColors.DARK_GREEN.toString()));
+			scatterChartButton.setBorderPainted(false);
+			scatterChartButton.addActionListener(e -> {
+				NewSpentGUI newSpentGUI = new NewSpentGUI(finances);
+				newSpentGUI.setVisible(true);
+				dispose();
+			});
+			gbc.anchor = GridBagConstraints.EAST;
+			jPanel.add(scatterChartButton, gbc);
+
 			Icon editIcon = new ImageIcon("src/main/java/presentation/images/edit.png");
 			Icon deleteIcon = new ImageIcon("src/main/java/presentation/images/delete.png");
 			gbc.anchor = GridBagConstraints.WEST;
-			for (Spent spent : spentsOfLoggedUser) {
+			for (Spent spent : spentsToBeListed) {
 				JPanel spentPanel = new JPanel();
 				spentPanel.setLayout(new GridBagLayout());
 				GridBagConstraints gbcSpent = new GridBagConstraints();

@@ -115,6 +115,7 @@ public class HomeGUI extends JFrame {
 
 		Icon filterIcon = new ImageIcon("src/main/java/presentation/images/filter.png");
 		JButton filterButton = new JButton(filterIcon);
+		filterButton.setOpaque(true);
 		filterButton.setMargin(new Insets(0, 0, 0, 0));
 		filterButton.setBackground(Color.WHITE);
 		filterButton.setBorder(null);
@@ -128,6 +129,7 @@ public class HomeGUI extends JFrame {
 
 		JButton newSpentButton = new JButton("New Spent");
 		newSpentButton.setFont(MyFonts.H2Plain.getFont());
+		newSpentButton.setOpaque(true);
 		newSpentButton.setPreferredSize(new Dimension(160, 26));
 		newSpentButton.setForeground(Color.WHITE);
 		newSpentButton.setBackground(Color.decode(MyColors.DARK_GREEN.toString()));
@@ -170,6 +172,7 @@ public class HomeGUI extends JFrame {
 		} else {
 			gbc.anchor = GridBagConstraints.WEST;
 			JButton barChartButton = new JButton("Bar chart");
+			barChartButton.setOpaque(true);
 			barChartButton.setFont(MyFonts.H2Plain.getFont());
 			barChartButton.setPreferredSize(new Dimension(160, 26));
 			barChartButton.setForeground(Color.WHITE);
@@ -185,14 +188,15 @@ public class HomeGUI extends JFrame {
 			jPanel.add(barChartButton, gbc);
 
 			JButton scatterChartButton = new JButton("Scatter chart");
+			scatterChartButton.setOpaque(true);
 			scatterChartButton.setFont(MyFonts.H2Plain.getFont());
 			scatterChartButton.setPreferredSize(new Dimension(160, 26));
 			scatterChartButton.setForeground(Color.WHITE);
 			scatterChartButton.setBackground(Color.decode(MyColors.DARK_GREEN.toString()));
 			scatterChartButton.setBorderPainted(false);
 			scatterChartButton.addActionListener(e -> {
-				NewSpentGUI newSpentGUI = new NewSpentGUI(finances);
-				newSpentGUI.setVisible(true);
+				ScatterChartGUI scatterChartGUIGUI = new ScatterChartGUI(finances);
+				scatterChartGUIGUI.setVisible(true);
 				dispose();
 			});
 			gbc.anchor = GridBagConstraints.EAST;
@@ -263,6 +267,7 @@ public class HomeGUI extends JFrame {
 				buttonsPanel.setBackground(Color.WHITE);
 
 				JButton editButton = new JButton(editIcon);
+				editButton.setOpaque(true);
 				editButton.setMargin(new Insets(0, 0, 0, 0));
 				editButton.setBackground(Color.decode(MyColors.MUSTARD.toString()));
 				editButton.setBorder(null);
@@ -276,6 +281,7 @@ public class HomeGUI extends JFrame {
 				spentPanel.add(editButton, gbcButtons);
 
 				JButton deleteButton = new JButton(deleteIcon);
+				deleteButton.setOpaque(true);
 				deleteButton.setMargin(new Insets(0, 0, 0, 0));
 				deleteButton.setBackground(Color.decode(MyColors.RED.toString()));
 				deleteButton.setBorder(null);

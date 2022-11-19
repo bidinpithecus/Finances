@@ -251,6 +251,7 @@ public class RegisterGUI extends JFrame {
 		jPanel.add(passwordConfirmationField, gbc);
 
 		JButton registerButton = new JButton("Register");
+		registerButton.setOpaque(true);
 		registerButton.setFont(MyFonts.H1Bold.getFont());
 		registerButton.setPreferredSize(new Dimension(238, 26));
 		registerButton.setForeground(Color.WHITE);

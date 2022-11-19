@@ -225,6 +225,7 @@ public class EditSpentGUI extends JFrame {
 		AtomicBoolean ableToEdit = new AtomicBoolean(true);
 
 		JButton editButton = new JButton("Edit");
+		editButton.setOpaque(true);
 		editButton.setFont(MyFonts.H1Bold.getFont());
 		editButton.setPreferredSize(new Dimension(238, 26));
 		editButton.setForeground(Color.WHITE);

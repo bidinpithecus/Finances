@@ -7,7 +7,6 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.category.CategoryRangeInfo;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 import javax.swing.*;
@@ -81,8 +80,7 @@ public class BarChartGUI extends JFrame {
 					sumOfSpentsByCategory.put(spent.getCategory(), sum);
 				}
 				dataset.addValue(sumOfSpentsByCategory.get(spent.getCategory()), spent.getCategory().toString(), String.valueOf(spent.getDate().get(Calendar.MONTH)));
-
-
+			}
 		}
 
 		JFreeChart chart = ChartFactory.createBarChart(
@@ -95,8 +93,26 @@ public class BarChartGUI extends JFrame {
 		);
 
 		ChartPanel chartPanel = new ChartPanel(chart);
+		chart.getPlot().setBackgroundPaint(Color.WHITE);
 		chartPanel.setBackground(Color.WHITE);
 		jPanel.add(chartPanel, gbc);
+		gbc.gridy++;
+
+		JButton returnButton = new JButton("<html><p><span style=\"color: " + MyColors.BLUE + "\">Return</span></p></html>");
+		returnButton.setFont(MyFonts.H2Plain.getFont());
+		returnButton.setForeground(Color.decode(MyColors.TITLE.toString()));
+		returnButton.setBackground(Color.WHITE);
+		returnButton.setOpaque(false);
+		returnButton.setContentAreaFilled(false);
+		returnButton.setBorderPainted(false);
+		returnButton.setFocusPainted(false);
+		returnButton.addActionListener(e -> {
+			HomeGUI homeGUI = new HomeGUI(finances);
+			homeGUI.setVisible(true);
+			dispose();
+		});
+		jPanel.add(returnButton, gbc);
+
 		getContentPane().requestFocusInWindow();
 		setVisible(true);
 	}

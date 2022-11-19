@@ -38,6 +38,11 @@ public class Main {
 		spent = new Spent(UUID.randomUUID(), "Uber", spentDate3, "Casa", 16, Category.TRANSPORTATION);
 		finances.newSpent(spent);
 
+		Calendar spentDate4 = Calendar.getInstance();
+		spentDate4.set(2020, Calendar.NOVEMBER, 1);
+		spent = new Spent(UUID.randomUUID(), "Shorts", spentDate4, "Maria loja", 43, Category.FUN);
+		finances.newSpent(spent);
+
 		new HomeGUI(finances);
 	}
 }

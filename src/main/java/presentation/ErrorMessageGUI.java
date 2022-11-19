@@ -45,6 +45,7 @@ public class ErrorMessageGUI extends JFrame {
 		jPanel.add(errorLabel, gbc);
 
 		JButton checkUser = new JButton("OK");
+		checkUser.setOpaque(true);
 		checkUser.setFont(MyFonts.H1Bold.getFont());
 		checkUser.setForeground(Color.decode(MyColors.TITLE.toString()));
 		checkUser.setBackground(Color.decode(MyColors.SUBTITLE.toString()));

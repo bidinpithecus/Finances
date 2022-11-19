@@ -48,6 +48,7 @@ public class FilterGUI extends JFrame {
 		gbc.gridx = 0;
 		gbc.gridy++;
 		JButton categoryFilterButton = new JButton("Category");
+		categoryFilterButton.setOpaque(true);
 		categoryFilterButton.setFont(MyFonts.H1Bold.getFont());
 		categoryFilterButton.setForeground(Color.WHITE);
 		categoryFilterButton.setBackground(Color.decode(MyColors.DARK_GREEN.toString()));
@@ -63,6 +64,7 @@ public class FilterGUI extends JFrame {
 		gbc.gridx = 0;
 		gbc.gridy++;
 		JButton monthFilterButton = new JButton("Month");
+		monthFilterButton.setOpaque(true);
 		monthFilterButton.setFont(MyFonts.H1Bold.getFont());
 		monthFilterButton.setForeground(Color.WHITE);
 		monthFilterButton.setBackground(Color.decode(MyColors.DARK_GREEN.toString()));

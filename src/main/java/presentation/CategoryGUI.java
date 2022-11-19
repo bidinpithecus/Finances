@@ -43,6 +43,7 @@ public class CategoryGUI extends JFrame {
 
 		for (Category category : Category.values()) {
 			JButton categoryButton = new JButton(category.toString());
+			categoryButton.setOpaque(true);
 			categoryButton.setFont(MyFonts.H1Plain.getFont());
 			categoryButton.setForeground(Color.WHITE);
 			categoryButton.setBackground(Color.decode(MyColors.DARK_GREEN.toString()));

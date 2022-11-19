@@ -116,6 +116,7 @@ public class LoginGUI extends JFrame {
 		jPanel.add(passwordField, gbc);
 
 		JButton loginButton = new JButton("Login");
+		loginButton.setOpaque(true);
 		loginButton.setFont(MyFonts.H1Bold.getFont());
 		loginButton.setPreferredSize(new Dimension(238, 26));
 		loginButton.setForeground(Color.WHITE);

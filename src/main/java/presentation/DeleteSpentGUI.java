@@ -71,6 +71,7 @@ public class DeleteSpentGUI extends JFrame {
 		gbc.gridx = 0;
 		gbc.gridy++;
 		JButton deleteButton = new JButton("Delete");
+		deleteButton.setOpaque(true);
 		deleteButton.setFont(MyFonts.H1Bold.getFont());
 		deleteButton.setForeground(Color.WHITE);
 		deleteButton.setBackground(Color.decode(MyColors.RED.toString()));

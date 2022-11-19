@@ -6,11 +6,14 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Calendar;
+import java.time.Month;
+import java.util.*;
 import java.util.List;
 
 public class ScatterChartGUI extends JFrame {
@@ -56,22 +59,53 @@ public class ScatterChartGUI extends JFrame {
 		gbc.insets = new Insets(padding, padding, padding, padding);
 		gbc.anchor = GridBagConstraints.WEST;
 
-		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-
-		for (Spent spent : spentToBeListed) {
-			System.out.println(spent);
-			dataset.addValue(spent.getValue(), spent.getCategory().toString(), String.valueOf(spent.getDate().get(Calendar.MONTH)));
+		XYSeriesCollection dataset = new XYSeriesCollection();
+		List<Spent> spentsOfMonth = null;
+		Map<Integer, Float> totalSpentOfEachMonth = new HashMap<>();
+		for (Month month : Month.values()) {
+			spentsOfMonth = finances.listSpent(month.getValue());
+			float totalSumOfMonth = 0;
+			for (Spent spent : spentsOfMonth) {
+				totalSumOfMonth += spent.getValue();
+			}
+			totalSpentOfEachMonth.put(month.getValue(), totalSumOfMonth);
+			XYSeries series = new XYSeries(month.toString());
+			series.add(month.getValue(), totalSpentOfEachMonth.get(month.getValue()));
+			dataset.addSeries(series);
 		}
 
-//		JFreeChart chart = ChartFactory.createScatterPlot(
-//				"Spents",
-//				"Month",
-//				"Price"
-//		);
+		JFreeChart chart = ChartFactory.createScatterPlot(
+				"Spents",
+				"Month",
+				"Price",
+				dataset,
+				PlotOrientation.VERTICAL,
+				true,true,false
+		);
 
-//		ChartPanel chartPanel = new ChartPanel(chart);
-//		chartPanel.setBackground(Color.WHITE);
-//		jPanel.add(chartPanel, gbc);
+		XYPlot plot = (XYPlot)chart.getPlot();
+		plot.setBackgroundPaint(Color.WHITE);
+
+		ChartPanel chartPanel = new ChartPanel(chart);
+		chartPanel.setBackground(Color.WHITE);
+		jPanel.add(chartPanel, gbc);
+		gbc.gridy++;
+
+		JButton returnButton = new JButton("<html><p><span style=\"color: " + MyColors.BLUE + "\">Return</span></p></html>");
+		returnButton.setFont(MyFonts.H2Plain.getFont());
+		returnButton.setForeground(Color.decode(MyColors.TITLE.toString()));
+		returnButton.setBackground(Color.WHITE);
+		returnButton.setOpaque(false);
+		returnButton.setContentAreaFilled(false);
+		returnButton.setBorderPainted(false);
+		returnButton.setFocusPainted(false);
+		returnButton.addActionListener(e -> {
+			HomeGUI homeGUI = new HomeGUI(finances);
+			homeGUI.setVisible(true);
+			dispose();
+		});
+		jPanel.add(returnButton, gbc);
+
 		getContentPane().requestFocusInWindow();
 		setVisible(true);
 	}

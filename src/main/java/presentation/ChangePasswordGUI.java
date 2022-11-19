@@ -106,6 +106,7 @@ public class ChangePasswordGUI extends JFrame {
 		jPanel.add(passwordConfirmationField, gbc);
 
 		JButton changeButton = new JButton("Change");
+		changeButton.setOpaque(true);
 		changeButton.setFont(MyFonts.H1Bold.getFont());
 		changeButton.setPreferredSize(new Dimension(238, 26));
 		changeButton.setForeground(Color.WHITE);

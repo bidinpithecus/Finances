@@ -190,6 +190,7 @@ public class ConfirmUserGUI extends JFrame {
 		jPanel.add(birthDateField, gbc);
 
 		JButton checkUser = new JButton("Check");
+		checkUser.setOpaque(true);
 		checkUser.setFont(MyFonts.H1Bold.getFont());
 		checkUser.setPreferredSize(new Dimension(238, 26));
 		checkUser.setForeground(Color.WHITE);

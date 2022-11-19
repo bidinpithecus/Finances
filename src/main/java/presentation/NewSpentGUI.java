@@ -210,6 +210,7 @@ public class NewSpentGUI extends JFrame {
 		jPanel.add(categoryField, gbc);
 
 		JButton registerButton = new JButton("Add");
+		registerButton.setOpaque(true);
 		registerButton.setFont(MyFonts.H1Bold.getFont());
 		registerButton.setPreferredSize(new Dimension(238, 26));
 		registerButton.setForeground(Color.WHITE);

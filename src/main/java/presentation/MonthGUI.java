@@ -43,6 +43,7 @@ public class MonthGUI extends JFrame {
 
 		for (Month month : Month.values()) {
 			JButton monthButton = new JButton(month.toString());
+			monthButton.setOpaque(true);
 			monthButton.setFont(MyFonts.H1Plain.getFont());
 			monthButton.setForeground(Color.WHITE);
 			monthButton.setBackground(Color.decode(MyColors.DARK_GREEN.toString()));

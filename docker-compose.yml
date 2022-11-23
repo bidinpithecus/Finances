@@ -1,0 +1,15 @@
+version: "3"
+
+services:
+  database:
+    container_name: finances-db
+    image: postgres:15
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: finances
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./.database-data:/var/lib/postgresql/data

@@ -203,7 +203,7 @@ public class ConfirmUserGUI extends JFrame {
 				ErrorMessageGUI errorMessageGUI = new ErrorMessageGUI("Warning, Invalid phone number!");
 				errorMessageGUI.setVisible(true);
 			} else {
-				if (!dateValidator.isValid(birthDateField.getText())) {
+				if (dateValidator.isValid(birthDateField.getText())) {
 					ErrorMessageGUI errorMessageGUI = new ErrorMessageGUI("Warning, Invalid date!");
 					errorMessageGUI.setVisible(true);
 				} else {

@@ -13,7 +13,6 @@ import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Objects;
 import java.util.UUID;
@@ -233,7 +232,7 @@ public class EditSpentGUI extends JFrame {
 		editButton.setBorderPainted(false);
 		editButton.addActionListener(e -> {
 			DateValidator dateValidator = new DateValidator("dd/mm/yyyy");
-			if (!dateValidator.isValid(dateField.getText())) {
+			if (dateValidator.isValid(dateField.getText())) {
 				ErrorMessageGUI errorMessageGUI = new ErrorMessageGUI("Warning, Invalid date!");
 				errorMessageGUI.setVisible(true);
 				return;

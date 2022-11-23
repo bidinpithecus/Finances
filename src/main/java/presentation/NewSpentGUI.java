@@ -219,7 +219,7 @@ public class NewSpentGUI extends JFrame {
 		registerButton.addActionListener(e -> {
 			Spent newSpent;
 			DateValidator dateValidator = new DateValidator("dd/mm/yyyy");
-			if (!dateValidator.isValid(dateField.getText())) {
+			if (dateValidator.isValid(dateField.getText())) {
 				ErrorMessageGUI errorMessageGUI = new ErrorMessageGUI("Warning, Invalid date!");
 				errorMessageGUI.setVisible(true);
 				return;

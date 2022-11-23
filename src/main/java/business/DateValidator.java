@@ -17,8 +17,8 @@ public class DateValidator {
         try {
             sdf.parse(dateStr);
         } catch (ParseException e) {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 }

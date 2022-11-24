@@ -5,15 +5,17 @@ import org.flywaydb.core.Flyway;
 public class MigrationRunner {
 
 	private final Flyway flyway;
-//	private final DbAuth dbAuth = new DbAuth();
 
 	public MigrationRunner() {
+		DbAuth dbAuth = new DbAuth();
 		this.flyway = Flyway
 				.configure()
+				.defaultSchema("main")
+				.baselineOnMigrate(true)
 				.dataSource(
-						"jdbc:postgresql://localhost:5432/finances",
-						"admin",
-						"admin"
+						dbAuth.getUrl(),
+						dbAuth.getUser(),
+						dbAuth.getPassword()
 				)
 				.load();
 	}

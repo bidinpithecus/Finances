@@ -13,9 +13,9 @@ public class MigrationRunner {
 				.defaultSchema("main")
 				.baselineOnMigrate(true)
 				.dataSource(
-						dbAuth.getUrl(),
-						dbAuth.getUser(),
-						dbAuth.getPassword()
+						dbAuth.getURL(),
+						dbAuth.getUSER(),
+						dbAuth.getPASSWORD()
 				)
 				.load();
 	}

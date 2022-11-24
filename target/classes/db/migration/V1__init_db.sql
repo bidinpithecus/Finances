@@ -31,11 +31,10 @@ CREATE TABLE IF NOT EXISTS "main"."spent"(
     FOREIGN KEY ("user_id") REFERENCES "main"."user"
 );
 
-INSERT INTO main.category (name) VALUES
-('Test'),
-('Food'),
-('Fun'),
-('Education'),
-('Health'),
-('Transportation'),
-('Another');
+-- INSERT INTO main.category (name) VALUES
+-- ('Food'),
+-- ('Fun'),
+-- ('Education'),
+-- ('Health'),
+-- ('Transportation'),
+-- ('Another');

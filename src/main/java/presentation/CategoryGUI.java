@@ -2,6 +2,7 @@ package presentation;
 
 import business.Finances;
 import data.Category;
+import persistence.CategoryDAO;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,7 +42,10 @@ public class CategoryGUI extends JFrame {
 		gbc.insets = new Insets(padding, padding, padding, padding);
 		gbc.anchor = GridBagConstraints.CENTER;
 
-		for (Category category : Category.values()) {
+		CategoryDAO categoryDAO = new CategoryDAO();
+		Category[] categories = categoryDAO.load();
+
+		for (Category category : categories) {
 			JButton categoryButton = new JButton(category.toString());
 			categoryButton.setOpaque(true);
 			categoryButton.setFont(MyFonts.H1Plain.getFont());

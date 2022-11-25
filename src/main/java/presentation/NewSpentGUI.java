@@ -4,6 +4,7 @@ import business.DateValidator;
 import business.Finances;
 import data.Category;
 import data.Spent;
+import persistence.CategoryDAO;
 
 import javax.swing.*;
 import javax.swing.text.MaskFormatter;
@@ -199,7 +200,10 @@ public class NewSpentGUI extends JFrame {
 		gbc.gridy++;
 		jPanel.add(valueField, gbc);
 
-		categoryField = new JComboBox<>(Category.values());
+		CategoryDAO categoryDAO = new CategoryDAO();
+		Category[] categories = categoryDAO.load();
+
+		categoryField = new JComboBox<>(categories);
 		categoryField.setPreferredSize(new Dimension(238, 26));
 		categoryField.setFont(MyFonts.H2Plain.getFont());
 		categoryField.setForeground(Color.decode(MyColors.TITLE.toString()));

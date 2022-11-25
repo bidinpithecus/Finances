@@ -38,4 +38,3 @@ INSERT INTO "main"."category" ("name") VALUES
 ('Health'),
 ('Transportation'),
 ('Another');
-

@@ -8,6 +8,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+import persistence.CategoryDAO;
 
 import javax.swing.*;
 import java.awt.*;
@@ -60,11 +61,14 @@ public class BarChartGUI extends JFrame {
 
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
+		CategoryDAO categoryDAO = new CategoryDAO();
+		Category[] categories = categoryDAO.load();
+
 		for (Month month : Month.values()) {
 			List<Spent> spentsOfMonth = finances.listSpent(month.getValue());
 			EnumMap<Category, Boolean> categoryAlreadyAdded = new EnumMap<>(Category.class);
 
-			for (Category category : Category.values()) {
+			for (Category category : categories) {
 				categoryAlreadyAdded.put(category, false);
 			}
 

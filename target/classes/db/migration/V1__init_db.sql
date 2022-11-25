@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS "main"."spent"(
     FOREIGN KEY ("user_id") REFERENCES "main"."user"
 );
 
-INSERT INTO main.category (name) VALUES
+INSERT INTO "main"."category" ("name") VALUES
 ('Food'),
 ('Fun'),
 ('Education'),

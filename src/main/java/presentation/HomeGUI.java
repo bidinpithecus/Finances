@@ -162,7 +162,7 @@ public class HomeGUI extends JFrame {
 		jPanel.add(hrLabel, gbc);
 
 		gbc.anchor = GridBagConstraints.CENTER;
-		if (finances.listSpent().isEmpty()) {
+		if (spentsToBeListed.isEmpty()) {
 			gbc.gridx = 0;
 			gbc.gridy++;
 			JLabel noActivitiesLabel = new JLabel("No activities registered");
